@@ -1,0 +1,5 @@
+{
+	"slate": {
+		"dev_command": "node scripts/start-slate.cjs $ZC_SLATE_PORT"
+	}
+}

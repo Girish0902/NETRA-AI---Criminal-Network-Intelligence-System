@@ -1,0 +1,311 @@
+﻿UnitID,UnitName,TypeID,ParentUnit,NationalityID,StateID,DistrictID,Active
+1001,Bagalkot Police Station 01,1,,1,1,1,1
+1002,Bagalkot Police Station 02,1,,1,1,1,1
+1003,Bagalkot Police Station 03,1,,1,1,1,1
+1004,Bagalkot Police Station 04,1,,1,1,1,1
+1005,Bagalkot Police Station 05,1,,1,1,1,1
+1006,Bagalkot Police Station 06,1,,1,1,1,1
+1007,Bagalkot Police Station 07,1,,1,1,1,1
+1008,Bagalkot Police Station 08,1,,1,1,1,1
+1009,Bagalkot Police Station 09,1,,1,1,1,1
+1010,Bagalkot Police Station 10,1,,1,1,1,1
+1011,Ballari Police Station 01,1,,1,1,2,1
+1012,Ballari Police Station 02,1,,1,1,2,1
+1013,Ballari Police Station 03,1,,1,1,2,1
+1014,Ballari Police Station 04,1,,1,1,2,1
+1015,Ballari Police Station 05,1,,1,1,2,1
+1016,Ballari Police Station 06,1,,1,1,2,1
+1017,Ballari Police Station 07,1,,1,1,2,1
+1018,Ballari Police Station 08,1,,1,1,2,1
+1019,Ballari Police Station 09,1,,1,1,2,1
+1020,Ballari Police Station 10,1,,1,1,2,1
+1021,Belagavi Police Station 01,1,,1,1,3,1
+1022,Belagavi Police Station 02,1,,1,1,3,1
+1023,Belagavi Police Station 03,1,,1,1,3,1
+1024,Belagavi Police Station 04,1,,1,1,3,1
+1025,Belagavi Police Station 05,1,,1,1,3,1
+1026,Belagavi Police Station 06,1,,1,1,3,1
+1027,Belagavi Police Station 07,1,,1,1,3,1
+1028,Belagavi Police Station 08,1,,1,1,3,1
+1029,Belagavi Police Station 09,1,,1,1,3,1
+1030,Belagavi Police Station 10,1,,1,1,3,1
+1031,Bengaluru Rural Police Station 01,1,,1,1,4,1
+1032,Bengaluru Rural Police Station 02,1,,1,1,4,1
+1033,Bengaluru Rural Police Station 03,1,,1,1,4,1
+1034,Bengaluru Rural Police Station 04,1,,1,1,4,1
+1035,Bengaluru Rural Police Station 05,1,,1,1,4,1
+1036,Bengaluru Rural Police Station 06,1,,1,1,4,1
+1037,Bengaluru Rural Police Station 07,1,,1,1,4,1
+1038,Bengaluru Rural Police Station 08,1,,1,1,4,1
+1039,Bengaluru Rural Police Station 09,1,,1,1,4,1
+1040,Bengaluru Rural Police Station 10,1,,1,1,4,1
+1041,Bengaluru Urban Police Station 01,1,,1,1,5,1
+1042,Bengaluru Urban Police Station 02,1,,1,1,5,1
+1043,Bengaluru Urban Police Station 03,1,,1,1,5,1
+1044,Bengaluru Urban Police Station 04,1,,1,1,5,1
+1045,Bengaluru Urban Police Station 05,1,,1,1,5,1
+1046,Bengaluru Urban Police Station 06,1,,1,1,5,1
+1047,Bengaluru Urban Police Station 07,1,,1,1,5,1
+1048,Bengaluru Urban Police Station 08,1,,1,1,5,1
+1049,Bengaluru Urban Police Station 09,1,,1,1,5,1
+1050,Bengaluru Urban Police Station 10,1,,1,1,5,1
+1051,Bidar Police Station 01,1,,1,1,6,1
+1052,Bidar Police Station 02,1,,1,1,6,1
+1053,Bidar Police Station 03,1,,1,1,6,1
+1054,Bidar Police Station 04,1,,1,1,6,1
+1055,Bidar Police Station 05,1,,1,1,6,1
+1056,Bidar Police Station 06,1,,1,1,6,1
+1057,Bidar Police Station 07,1,,1,1,6,1
+1058,Bidar Police Station 08,1,,1,1,6,1
+1059,Bidar Police Station 09,1,,1,1,6,1
+1060,Bidar Police Station 10,1,,1,1,6,1
+1061,Chamarajanagar Police Station 01,1,,1,1,7,1
+1062,Chamarajanagar Police Station 02,1,,1,1,7,1
+1063,Chamarajanagar Police Station 03,1,,1,1,7,1
+1064,Chamarajanagar Police Station 04,1,,1,1,7,1
+1065,Chamarajanagar Police Station 05,1,,1,1,7,1
+1066,Chamarajanagar Police Station 06,1,,1,1,7,1
+1067,Chamarajanagar Police Station 07,1,,1,1,7,1
+1068,Chamarajanagar Police Station 08,1,,1,1,7,1
+1069,Chamarajanagar Police Station 09,1,,1,1,7,1
+1070,Chamarajanagar Police Station 10,1,,1,1,7,1
+1071,Chikkaballapur Police Station 01,1,,1,1,8,1
+1072,Chikkaballapur Police Station 02,1,,1,1,8,1
+1073,Chikkaballapur Police Station 03,1,,1,1,8,1
+1074,Chikkaballapur Police Station 04,1,,1,1,8,1
+1075,Chikkaballapur Police Station 05,1,,1,1,8,1
+1076,Chikkaballapur Police Station 06,1,,1,1,8,1
+1077,Chikkaballapur Police Station 07,1,,1,1,8,1
+1078,Chikkaballapur Police Station 08,1,,1,1,8,1
+1079,Chikkaballapur Police Station 09,1,,1,1,8,1
+1080,Chikkaballapur Police Station 10,1,,1,1,8,1
+1081,Chikkamagaluru Police Station 01,1,,1,1,9,1
+1082,Chikkamagaluru Police Station 02,1,,1,1,9,1
+1083,Chikkamagaluru Police Station 03,1,,1,1,9,1
+1084,Chikkamagaluru Police Station 04,1,,1,1,9,1
+1085,Chikkamagaluru Police Station 05,1,,1,1,9,1
+1086,Chikkamagaluru Police Station 06,1,,1,1,9,1
+1087,Chikkamagaluru Police Station 07,1,,1,1,9,1
+1088,Chikkamagaluru Police Station 08,1,,1,1,9,1
+1089,Chikkamagaluru Police Station 09,1,,1,1,9,1
+1090,Chikkamagaluru Police Station 10,1,,1,1,9,1
+1091,Chitradurga Police Station 01,1,,1,1,10,1
+1092,Chitradurga Police Station 02,1,,1,1,10,1
+1093,Chitradurga Police Station 03,1,,1,1,10,1
+1094,Chitradurga Police Station 04,1,,1,1,10,1
+1095,Chitradurga Police Station 05,1,,1,1,10,1
+1096,Chitradurga Police Station 06,1,,1,1,10,1
+1097,Chitradurga Police Station 07,1,,1,1,10,1
+1098,Chitradurga Police Station 08,1,,1,1,10,1
+1099,Chitradurga Police Station 09,1,,1,1,10,1
+1100,Chitradurga Police Station 10,1,,1,1,10,1
+1101,Dakshina Kannada Police Station 01,1,,1,1,11,1
+1102,Dakshina Kannada Police Station 02,1,,1,1,11,1
+1103,Dakshina Kannada Police Station 03,1,,1,1,11,1
+1104,Dakshina Kannada Police Station 04,1,,1,1,11,1
+1105,Dakshina Kannada Police Station 05,1,,1,1,11,1
+1106,Dakshina Kannada Police Station 06,1,,1,1,11,1
+1107,Dakshina Kannada Police Station 07,1,,1,1,11,1
+1108,Dakshina Kannada Police Station 08,1,,1,1,11,1
+1109,Dakshina Kannada Police Station 09,1,,1,1,11,1
+1110,Dakshina Kannada Police Station 10,1,,1,1,11,1
+1111,Davanagere Police Station 01,1,,1,1,12,1
+1112,Davanagere Police Station 02,1,,1,1,12,1
+1113,Davanagere Police Station 03,1,,1,1,12,1
+1114,Davanagere Police Station 04,1,,1,1,12,1
+1115,Davanagere Police Station 05,1,,1,1,12,1
+1116,Davanagere Police Station 06,1,,1,1,12,1
+1117,Davanagere Police Station 07,1,,1,1,12,1
+1118,Davanagere Police Station 08,1,,1,1,12,1
+1119,Davanagere Police Station 09,1,,1,1,12,1
+1120,Davanagere Police Station 10,1,,1,1,12,1
+1121,Dharwad Police Station 01,1,,1,1,13,1
+1122,Dharwad Police Station 02,1,,1,1,13,1
+1123,Dharwad Police Station 03,1,,1,1,13,1
+1124,Dharwad Police Station 04,1,,1,1,13,1
+1125,Dharwad Police Station 05,1,,1,1,13,1
+1126,Dharwad Police Station 06,1,,1,1,13,1
+1127,Dharwad Police Station 07,1,,1,1,13,1
+1128,Dharwad Police Station 08,1,,1,1,13,1
+1129,Dharwad Police Station 09,1,,1,1,13,1
+1130,Dharwad Police Station 10,1,,1,1,13,1
+1131,Gadag Police Station 01,1,,1,1,14,1
+1132,Gadag Police Station 02,1,,1,1,14,1
+1133,Gadag Police Station 03,1,,1,1,14,1
+1134,Gadag Police Station 04,1,,1,1,14,1
+1135,Gadag Police Station 05,1,,1,1,14,1
+1136,Gadag Police Station 06,1,,1,1,14,1
+1137,Gadag Police Station 07,1,,1,1,14,1
+1138,Gadag Police Station 08,1,,1,1,14,1
+1139,Gadag Police Station 09,1,,1,1,14,1
+1140,Gadag Police Station 10,1,,1,1,14,1
+1141,Hassan Police Station 01,1,,1,1,15,1
+1142,Hassan Police Station 02,1,,1,1,15,1
+1143,Hassan Police Station 03,1,,1,1,15,1
+1144,Hassan Police Station 04,1,,1,1,15,1
+1145,Hassan Police Station 05,1,,1,1,15,1
+1146,Hassan Police Station 06,1,,1,1,15,1
+1147,Hassan Police Station 07,1,,1,1,15,1
+1148,Hassan Police Station 08,1,,1,1,15,1
+1149,Hassan Police Station 09,1,,1,1,15,1
+1150,Hassan Police Station 10,1,,1,1,15,1
+1151,Haveri Police Station 01,1,,1,1,16,1
+1152,Haveri Police Station 02,1,,1,1,16,1
+1153,Haveri Police Station 03,1,,1,1,16,1
+1154,Haveri Police Station 04,1,,1,1,16,1
+1155,Haveri Police Station 05,1,,1,1,16,1
+1156,Haveri Police Station 06,1,,1,1,16,1
+1157,Haveri Police Station 07,1,,1,1,16,1
+1158,Haveri Police Station 08,1,,1,1,16,1
+1159,Haveri Police Station 09,1,,1,1,16,1
+1160,Haveri Police Station 10,1,,1,1,16,1
+1161,Kalaburagi Police Station 01,1,,1,1,17,1
+1162,Kalaburagi Police Station 02,1,,1,1,17,1
+1163,Kalaburagi Police Station 03,1,,1,1,17,1
+1164,Kalaburagi Police Station 04,1,,1,1,17,1
+1165,Kalaburagi Police Station 05,1,,1,1,17,1
+1166,Kalaburagi Police Station 06,1,,1,1,17,1
+1167,Kalaburagi Police Station 07,1,,1,1,17,1
+1168,Kalaburagi Police Station 08,1,,1,1,17,1
+1169,Kalaburagi Police Station 09,1,,1,1,17,1
+1170,Kalaburagi Police Station 10,1,,1,1,17,1
+1171,Kodagu Police Station 01,1,,1,1,18,1
+1172,Kodagu Police Station 02,1,,1,1,18,1
+1173,Kodagu Police Station 03,1,,1,1,18,1
+1174,Kodagu Police Station 04,1,,1,1,18,1
+1175,Kodagu Police Station 05,1,,1,1,18,1
+1176,Kodagu Police Station 06,1,,1,1,18,1
+1177,Kodagu Police Station 07,1,,1,1,18,1
+1178,Kodagu Police Station 08,1,,1,1,18,1
+1179,Kodagu Police Station 09,1,,1,1,18,1
+1180,Kodagu Police Station 10,1,,1,1,18,1
+1181,Kolar Police Station 01,1,,1,1,19,1
+1182,Kolar Police Station 02,1,,1,1,19,1
+1183,Kolar Police Station 03,1,,1,1,19,1
+1184,Kolar Police Station 04,1,,1,1,19,1
+1185,Kolar Police Station 05,1,,1,1,19,1
+1186,Kolar Police Station 06,1,,1,1,19,1
+1187,Kolar Police Station 07,1,,1,1,19,1
+1188,Kolar Police Station 08,1,,1,1,19,1
+1189,Kolar Police Station 09,1,,1,1,19,1
+1190,Kolar Police Station 10,1,,1,1,19,1
+1191,Koppal Police Station 01,1,,1,1,20,1
+1192,Koppal Police Station 02,1,,1,1,20,1
+1193,Koppal Police Station 03,1,,1,1,20,1
+1194,Koppal Police Station 04,1,,1,1,20,1
+1195,Koppal Police Station 05,1,,1,1,20,1
+1196,Koppal Police Station 06,1,,1,1,20,1
+1197,Koppal Police Station 07,1,,1,1,20,1
+1198,Koppal Police Station 08,1,,1,1,20,1
+1199,Koppal Police Station 09,1,,1,1,20,1
+1200,Koppal Police Station 10,1,,1,1,20,1
+1201,Mandya Police Station 01,1,,1,1,21,1
+1202,Mandya Police Station 02,1,,1,1,21,1
+1203,Mandya Police Station 03,1,,1,1,21,1
+1204,Mandya Police Station 04,1,,1,1,21,1
+1205,Mandya Police Station 05,1,,1,1,21,1
+1206,Mandya Police Station 06,1,,1,1,21,1
+1207,Mandya Police Station 07,1,,1,1,21,1
+1208,Mandya Police Station 08,1,,1,1,21,1
+1209,Mandya Police Station 09,1,,1,1,21,1
+1210,Mandya Police Station 10,1,,1,1,21,1
+1211,Mysuru Police Station 01,1,,1,1,22,1
+1212,Mysuru Police Station 02,1,,1,1,22,1
+1213,Mysuru Police Station 03,1,,1,1,22,1
+1214,Mysuru Police Station 04,1,,1,1,22,1
+1215,Mysuru Police Station 05,1,,1,1,22,1
+1216,Mysuru Police Station 06,1,,1,1,22,1
+1217,Mysuru Police Station 07,1,,1,1,22,1
+1218,Mysuru Police Station 08,1,,1,1,22,1
+1219,Mysuru Police Station 09,1,,1,1,22,1
+1220,Mysuru Police Station 10,1,,1,1,22,1
+1221,Raichur Police Station 01,1,,1,1,23,1
+1222,Raichur Police Station 02,1,,1,1,23,1
+1223,Raichur Police Station 03,1,,1,1,23,1
+1224,Raichur Police Station 04,1,,1,1,23,1
+1225,Raichur Police Station 05,1,,1,1,23,1
+1226,Raichur Police Station 06,1,,1,1,23,1
+1227,Raichur Police Station 07,1,,1,1,23,1
+1228,Raichur Police Station 08,1,,1,1,23,1
+1229,Raichur Police Station 09,1,,1,1,23,1
+1230,Raichur Police Station 10,1,,1,1,23,1
+1231,Ramanagara Police Station 01,1,,1,1,24,1
+1232,Ramanagara Police Station 02,1,,1,1,24,1
+1233,Ramanagara Police Station 03,1,,1,1,24,1
+1234,Ramanagara Police Station 04,1,,1,1,24,1
+1235,Ramanagara Police Station 05,1,,1,1,24,1
+1236,Ramanagara Police Station 06,1,,1,1,24,1
+1237,Ramanagara Police Station 07,1,,1,1,24,1
+1238,Ramanagara Police Station 08,1,,1,1,24,1
+1239,Ramanagara Police Station 09,1,,1,1,24,1
+1240,Ramanagara Police Station 10,1,,1,1,24,1
+1241,Shivamogga Police Station 01,1,,1,1,25,1
+1242,Shivamogga Police Station 02,1,,1,1,25,1
+1243,Shivamogga Police Station 03,1,,1,1,25,1
+1244,Shivamogga Police Station 04,1,,1,1,25,1
+1245,Shivamogga Police Station 05,1,,1,1,25,1
+1246,Shivamogga Police Station 06,1,,1,1,25,1
+1247,Shivamogga Police Station 07,1,,1,1,25,1
+1248,Shivamogga Police Station 08,1,,1,1,25,1
+1249,Shivamogga Police Station 09,1,,1,1,25,1
+1250,Shivamogga Police Station 10,1,,1,1,25,1
+1251,Tumakuru Police Station 01,1,,1,1,26,1
+1252,Tumakuru Police Station 02,1,,1,1,26,1
+1253,Tumakuru Police Station 03,1,,1,1,26,1
+1254,Tumakuru Police Station 04,1,,1,1,26,1
+1255,Tumakuru Police Station 05,1,,1,1,26,1
+1256,Tumakuru Police Station 06,1,,1,1,26,1
+1257,Tumakuru Police Station 07,1,,1,1,26,1
+1258,Tumakuru Police Station 08,1,,1,1,26,1
+1259,Tumakuru Police Station 09,1,,1,1,26,1
+1260,Tumakuru Police Station 10,1,,1,1,26,1
+1261,Udupi Police Station 01,1,,1,1,27,1
+1262,Udupi Police Station 02,1,,1,1,27,1
+1263,Udupi Police Station 03,1,,1,1,27,1
+1264,Udupi Police Station 04,1,,1,1,27,1
+1265,Udupi Police Station 05,1,,1,1,27,1
+1266,Udupi Police Station 06,1,,1,1,27,1
+1267,Udupi Police Station 07,1,,1,1,27,1
+1268,Udupi Police Station 08,1,,1,1,27,1
+1269,Udupi Police Station 09,1,,1,1,27,1
+1270,Udupi Police Station 10,1,,1,1,27,1
+1271,Uttara Kannada Police Station 01,1,,1,1,28,1
+1272,Uttara Kannada Police Station 02,1,,1,1,28,1
+1273,Uttara Kannada Police Station 03,1,,1,1,28,1
+1274,Uttara Kannada Police Station 04,1,,1,1,28,1
+1275,Uttara Kannada Police Station 05,1,,1,1,28,1
+1276,Uttara Kannada Police Station 06,1,,1,1,28,1
+1277,Uttara Kannada Police Station 07,1,,1,1,28,1
+1278,Uttara Kannada Police Station 08,1,,1,1,28,1
+1279,Uttara Kannada Police Station 09,1,,1,1,28,1
+1280,Uttara Kannada Police Station 10,1,,1,1,28,1
+1281,Vijayapura Police Station 01,1,,1,1,29,1
+1282,Vijayapura Police Station 02,1,,1,1,29,1
+1283,Vijayapura Police Station 03,1,,1,1,29,1
+1284,Vijayapura Police Station 04,1,,1,1,29,1
+1285,Vijayapura Police Station 05,1,,1,1,29,1
+1286,Vijayapura Police Station 06,1,,1,1,29,1
+1287,Vijayapura Police Station 07,1,,1,1,29,1
+1288,Vijayapura Police Station 08,1,,1,1,29,1
+1289,Vijayapura Police Station 09,1,,1,1,29,1
+1290,Vijayapura Police Station 10,1,,1,1,29,1
+1291,Yadgir Police Station 01,1,,1,1,30,1
+1292,Yadgir Police Station 02,1,,1,1,30,1
+1293,Yadgir Police Station 03,1,,1,1,30,1
+1294,Yadgir Police Station 04,1,,1,1,30,1
+1295,Yadgir Police Station 05,1,,1,1,30,1
+1296,Yadgir Police Station 06,1,,1,1,30,1
+1297,Yadgir Police Station 07,1,,1,1,30,1
+1298,Yadgir Police Station 08,1,,1,1,30,1
+1299,Yadgir Police Station 09,1,,1,1,30,1
+1300,Yadgir Police Station 10,1,,1,1,30,1
+1301,Vijayanagara Police Station 01,1,,1,1,31,1
+1302,Vijayanagara Police Station 02,1,,1,1,31,1
+1303,Vijayanagara Police Station 03,1,,1,1,31,1
+1304,Vijayanagara Police Station 04,1,,1,1,31,1
+1305,Vijayanagara Police Station 05,1,,1,1,31,1
+1306,Vijayanagara Police Station 06,1,,1,1,31,1
+1307,Vijayanagara Police Station 07,1,,1,1,31,1
+1308,Vijayanagara Police Station 08,1,,1,1,31,1
+1309,Vijayanagara Police Station 09,1,,1,1,31,1
+1310,Vijayanagara Police Station 10,1,,1,1,31,1

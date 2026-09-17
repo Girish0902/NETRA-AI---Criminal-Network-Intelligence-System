@@ -1,0 +1,15 @@
+﻿{
+  "functions": {
+    "targets": [
+      "NETRA_api"
+    ],
+    "ignore": [],
+    "source": "functions"
+  },
+  "slate": [
+    {
+      "name": "react-vite",
+      "source": "D:\\NETRA"
+    }
+  ]
+}

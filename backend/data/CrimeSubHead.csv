@@ -1,0 +1,21 @@
+﻿CrimeSubHeadID,CrimeHeadID,CrimeHeadName,SeqID
+1,1,Murder,1
+2,1,Attempt to Murder,2
+3,1,Assault,3
+4,2,Robbery,1
+5,2,Burglary,2
+6,2,Vehicle Theft,3
+7,2,House Theft,4
+8,3,Domestic Violence,1
+9,3,Sexual Harassment,2
+10,3,Kidnapping,3
+11,4,Online Fraud,1
+12,4,Identity Theft,2
+13,4,Cyber Stalking,3
+14,5,NDPS Possession,1
+15,5,Drug Trafficking,2
+16,6,Rioting,1
+17,6,Unlawful Assembly,2
+18,7,Cheating,1
+19,7,Forgery,2
+20,8,Hit and Run,1

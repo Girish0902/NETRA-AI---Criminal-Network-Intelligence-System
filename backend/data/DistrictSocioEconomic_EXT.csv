@@ -1,0 +1,32 @@
+﻿DistrictID,DistrictName,UrbanisationPercent,PopulationDensityPerSqKm,LiteracyPercent,YouthPopulationPercent,UnemploymentPercent,ReferenceYear
+1,Bagalkot,63,529,86.5,25.1,4.5,2025
+2,Ballari,56,878,78.3,29.7,7.8,2025
+3,Belagavi,39,907,89.8,35.3,4.3,2025
+4,Bengaluru Rural,57,479,67.7,34.0,8.8,2025
+5,Bengaluru Urban,90,4300,89.7,26.9,5.8,2025
+6,Bidar,74,544,83.0,30.5,7.1,2025
+7,Chamarajanagar,50,709,66.0,31.0,4.0,2025
+8,Chikkaballapur,75,304,80.7,26.9,3.7,2025
+9,Chikkamagaluru,39,522,78.5,27.5,8.7,2025
+10,Chitradurga,31,497,67.3,28.7,4.6,2025
+11,Dakshina Kannada,38,777,87.2,30.9,8.3,2025
+12,Davanagere,73,921,66.6,28.7,5.8,2025
+13,Dharwad,27,514,66.5,35.7,5.9,2025
+14,Gadag,60,347,71.5,27.5,9.1,2025
+15,Hassan,56,590,71.3,33.7,6.9,2025
+16,Haveri,54,258,67.2,30.9,9.1,2025
+17,Kalaburagi,54,744,78.9,25.2,3.7,2025
+18,Kodagu,69,213,88.2,33.3,3.6,2025
+19,Kolar,65,703,69.5,26.3,8.4,2025
+20,Koppal,64,313,82.4,31.7,3.7,2025
+21,Mandya,57,291,89.6,32.9,7.0,2025
+22,Mysuru,61,226,80.8,34.7,8.9,2025
+23,Raichur,37,223,67.5,35.6,6.9,2025
+24,Ramanagara,37,853,67.5,34.0,5.0,2025
+25,Shivamogga,58,768,87.9,28.7,4.5,2025
+26,Tumakuru,29,268,73.4,32.2,8.3,2025
+27,Udupi,29,292,87.5,33.2,6.4,2025
+28,Uttara Kannada,48,234,72.8,35.5,3.5,2025
+29,Vijayapura,70,381,70.1,28.4,5.4,2025
+30,Yadgir,38,599,82.8,28.2,6.1,2025
+31,Vijayanagara,41,772,83.1,33.2,7.6,2025

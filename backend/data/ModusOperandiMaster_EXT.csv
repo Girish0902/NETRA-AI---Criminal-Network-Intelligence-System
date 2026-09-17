@@ -1,0 +1,11 @@
+﻿MOID,MOName,MODescription
+1,Forced Entry,Door/window forced; common in burglary cases
+2,Two-Wheeler Snatching,Motorcycle used for snatching or rapid escape
+3,Phishing Link,Fraud initiated through fake payment/login link
+4,OTP Social Engineering,Victim persuaded to disclose OTP
+5,Stolen Key / Duplicate Key,Vehicle or property accessed with copied/stolen key
+6,Known-Person Assault,Victim and accused had prior acquaintance
+7,Night-Time Surveillance,Location watched before offence
+8,Fake Document Trail,Forged identity/invoice/property document used
+9,Public Place Targeting,"Victims selected at markets, bus stands or crowded areas"
+10,Drug Courier Network,Multiple carriers linked to a supplier route

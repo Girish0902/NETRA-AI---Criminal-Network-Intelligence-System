@@ -1,0 +1,27 @@
+﻿ActCode,SectionCode,SectionDescription,Active
+IPC,302,Murder,0
+IPC,307,Attempt to murder,0
+IPC,323,Voluntarily causing hurt,0
+IPC,392,Robbery,0
+IPC,457,House-breaking by night,0
+IPC,379,Theft,0
+IPC,354,Assault or criminal force against woman,0
+IPC,363,Kidnapping,0
+IPC,420,Cheating,0
+IPC,468,Forgery for purpose of cheating,0
+BNS,103,Murder,1
+BNS,109,Attempt to murder,1
+BNS,115,Voluntarily causing hurt,1
+BNS,309,Robbery,1
+BNS,331,House trespass and burglary,1
+BNS,303,Theft,1
+BNS,74,Assault or criminal force against woman,1
+BNS,137,Kidnapping,1
+BNS,318,Cheating,1
+BNS,336,Forgery,1
+IT,66C,Identity theft,1
+IT,66D,Cheating by personation using computer,1
+IT,67,Publishing obscene electronic material,1
+NDPS,20,Cannabis-related offences,1
+NDPS,21,Manufactured drugs and preparations,1
+MV,134,Duty of driver in case of accident,1

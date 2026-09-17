@@ -1,0 +1,16 @@
+{
+  "name": "NETRA-ai-local-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "compression": "^1.8.2",
+    "cors": "^2.8.5",
+    "csv-parse": "^7.0.2",
+    "express": "^4.21.2"
+  }
+}
