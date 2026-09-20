@@ -3,7 +3,6 @@ import {
   EyeOff,
   LockKeyhole,
   Mail,
-  ShieldCheck,
 } from "lucide-react";
 
 import { useState } from "react";
@@ -14,13 +13,17 @@ import {
   useNavigate,
 } from "react-router-dom";
 
+import netraLogo from "../assets/netra-logo.png";
 import { useAuth } from "../context/AuthContext";
+import { useI18n } from "../i18n";
 
 function Login() {
   const navigate = useNavigate();
   const location = useLocation();
 
   const { login, isAuthenticated } = useAuth();
+
+  const { t } = useI18n();
 
   const registrationParams = new URLSearchParams(
     location.search,
@@ -92,8 +95,13 @@ function Login() {
       <div className="grid w-full max-w-5xl overflow-hidden rounded-3xl border border-edge bg-surface shadow-2xl lg:grid-cols-2">
         <section className="hidden min-h-[620px] flex-col justify-between bg-gradient-to-br from-primary/25 via-canvas to-background p-10 lg:flex">
           <div>
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-primary/30 bg-primary/10 text-primary-hover">
-              <ShieldCheck size={30} />
+            <div className="flex h-14 w-fit shrink-0 items-center">
+              <img
+                src={netraLogo}
+                alt="NETRA"
+                className="h-12 w-auto object-contain"
+                draggable="false"
+              />
             </div>
 
             <h1 className="mt-6 text-3xl font-bold tracking-tight text-ink">
@@ -101,23 +109,21 @@ function Login() {
             </h1>
 
             <p className="mt-3 text-ink-secondary">
-              Crime Intelligence Platform
+              {t("auth.platformLabel")}
             </p>
           </div>
 
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary-hover">
-              Crime Intelligence Platform
+              {t("auth.platformLabel")}
             </p>
 
             <h2 className="mt-4 max-w-md text-3xl font-bold leading-tight text-ink">
-              Dataset-driven crime intelligence for safer and faster
-              investigations.
+              {t("auth.loginTitle")}
             </h2>
 
             <p className="mt-4 max-w-md text-sm leading-7 text-ink-secondary">
-              Access operational analytics, hotspot intelligence,
-              repeat-offender analysis and dataset-backed reports.
+              {t("auth.loginSubtitle")}
             </p>
           </div>
         </section>
@@ -125,17 +131,22 @@ function Login() {
         <section className="flex min-h-[620px] items-center p-7 sm:p-10">
           <div className="mx-auto w-full max-w-md">
             <div className="lg:hidden">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary-hover">
-                <ShieldCheck size={25} />
+              <div className="flex h-12 w-fit items-center">
+                <img
+                  src={netraLogo}
+                  alt="NETRA"
+                  className="h-11 w-auto object-contain"
+                  draggable="false"
+                />
               </div>
             </div>
 
             <h2 className="mt-5 text-3xl font-bold tracking-tight text-ink">
-              Sign in
+              {t("auth.signInHeading")}
             </h2>
 
             <p className="mt-2 text-sm text-ink-secondary">
-              Enter your authorised NETRA AI credentials.
+              {t("auth.signInDescription")}
             </p>
 
             {error && (

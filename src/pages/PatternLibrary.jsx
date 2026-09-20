@@ -16,6 +16,7 @@ import Panel from "../components/ui/Panel";
 import StatCard from "../components/ui/StatCard";
 import MonoLabel from "../components/ui/MonoLabel";
 import { patternLibraryData } from "../data/patternLibrary";
+import { useI18n } from "../i18n";
 
 const FILTERS = [
   { key: "All", label: "All patterns" },
@@ -39,6 +40,8 @@ const TREND_CLASS = {
 };
 
 function PatternLibrary() {
+  const { t } = useI18n();
+
   const [filter, setFilter] = useState("All");
 
   const patterns = useMemo(() => {
@@ -78,21 +81,21 @@ function PatternLibrary() {
     <div className="flex h-full min-h-0 flex-col bg-canvas">
       <PageHeader
         icon={BookMarked}
-        title="Pattern Intelligence Library"
-        description="Recurring modus operandi, suspicious clusters and case-instance patterns that feed similar-case suggestions"
+        title={t("pages.patterns.title")}
+        description={t("pages.patterns.description")}
       />
 
       <main className="min-h-0 flex-1 overflow-y-auto p-5">
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <StatCard
-            title="Detected patterns"
+            title={t("pages.patterns.detected")}
             value={totals.patterns}
             description="Active intelligence library"
             icon={Layers}
           />
 
           <StatCard
-            title="Recurring patterns"
+            title={t("pages.patterns.recurring")}
             value={totals.recurring}
             description="May indicate organised groups"
             icon={Repeat}
@@ -100,7 +103,7 @@ function PatternLibrary() {
           />
 
           <StatCard
-            title="Suspicious patterns"
+            title={t("pages.patterns.suspicious")}
             value={totals.suspicious}
             description="Require case review"
             icon={ScanSearch}
@@ -108,7 +111,7 @@ function PatternLibrary() {
           />
 
           <StatCard
-            title="Cases referenced"
+            title={t("pages.patterns.referenced")}
             value={totals.totalCases}
             description="Across all linked FIR records"
             icon={TrendingUp}
@@ -139,7 +142,7 @@ function PatternLibrary() {
             <div className="col-span-full">
               <EmptyState
                 icon={Layers}
-                title="No patterns in this category"
+                title={t("pages.patterns.empty")}
                 message="Patterns are generated from case instances as recurring behaviour is detected across FIR records."
               />
             </div>

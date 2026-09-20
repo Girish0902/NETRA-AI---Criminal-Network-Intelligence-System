@@ -1,14 +1,23 @@
-import { useEffect, useMemo } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import L from "leaflet";
 import {
   CircleMarker,
   MapContainer,
+  Marker,
   Popup,
   TileLayer,
+  Tooltip,
   useMap,
 } from "react-leaflet";
+import MarkerClusterGroup from "react-leaflet-cluster";
 
 import {
-  Crosshair,
   MapPinned,
   ShieldAlert,
 } from "lucide-react";
@@ -16,13 +25,132 @@ import {
 import PageHeader from "../components/common/PageHeader";
 import { useApi } from "../hooks/useApi";
 import { api } from "../services/api";
+import { useI18n } from "../i18n";
+
+import "leaflet.markercluster/dist/MarkerCluster.css";
+
+const KARNATAKA_BOUNDS = [
+  [11.6, 73.95],
+  [18.35, 78.0],
+];
+
+const KARNATAKA_CENTER = [15.15, 75.7];
+
+const CLUSTER_LOW = "#22c55e";
+const CLUSTER_MEDIUM = "#f59e0b";
+const CLUSTER_HIGH = "#ef4444";
+
+const POINT_ICON = L.divIcon({
+  html: '<div class="netra-map-point"></div>',
+  className: "netra-map-point-wrap",
+  iconSize: L.point(12, 12),
+  iconAnchor: L.point(6, 6),
+});
+
+const POINT_ICON_HEINOUS = L.divIcon({
+  html: '<div class="netra-map-point netra-map-point--heinous"></div>',
+  className: "netra-map-point-wrap",
+  iconSize: L.point(14, 14),
+  iconAnchor: L.point(7, 7),
+});
+
+function FitKarnataka({ points }) {
+  const map = useMap();
+
+  useEffect(() => {
+    map.fitBounds(KARNATAKA_BOUNDS, {
+      padding: [24, 24],
+      maxZoom: 8,
+    });
+  }, [map]);
+
+  useEffect(() => {
+    if (!points.length) {
+      return;
+    }
+
+    const bounds = L.latLngBounds(
+      points.map((point) => [
+        point.latitude,
+        point.longitude,
+      ]),
+    );
+
+    map.fitBounds(bounds, {
+      padding: [28, 28],
+      maxZoom: 9,
+    });
+  }, [map, points]);
+
+  return null;
+}
+
+function createClusterIcon(cluster) {
+  const count = cluster.getChildCount();
+  const colour = getClusterColour(count);
+  const size =
+    count >= 150 ? 52 : count >= 70 ? 44 : 36;
+
+  const html = [
+    '<div class="netra-map-cluster" ',
+    `style="--cluster-colour:${colour};width:${size}px;height:${size}px">`,
+    `<span>${count}</span>`,
+    "</div>",
+  ].join("");
+
+  return L.divIcon({
+    html,
+    className: "netra-map-cluster-wrap",
+    iconSize: L.point(size, size),
+    iconAnchor: L.point(size / 2, size / 2),
+    popupAnchor: L.point(0, -size / 2),
+  });
+}
 
 function HotspotMap() {
+  const { t } = useI18n();
   const {
     data,
     loading,
     error,
   } = useApi(() => api.hotspots(), []);
+
+  const [tilesFailed, setTilesFailed] = useState(false);
+  const tileErrorCount = useRef(0);
+  const tilesEverLoaded = useRef(false);
+
+  const onTileLoad = useCallback(() => {
+    tilesEverLoaded.current = true;
+    tileErrorCount.current = 0;
+    setTilesFailed(false);
+  }, []);
+
+  const onTilesDone = useCallback(() => {
+    if (tilesEverLoaded.current) {
+      tileErrorCount.current = 0;
+      setTilesFailed(false);
+    }
+  }, []);
+
+  const onTileError = useCallback(() => {
+    tileErrorCount.current += 1;
+    if (tileErrorCount.current >= 3) {
+      setTilesFailed(true);
+    }
+  }, []);
+
+  const tileLayerRef = useCallback(
+    (layer) => {
+      if (!layer) {
+        return;
+      }
+
+      layer.on("tileerror", onTileError);
+      layer.on("tileload", onTileLoad);
+      layer.on("load", onTilesDone);
+    },
+    [onTileError, onTileLoad, onTilesDone],
+  );
 
   const points = useMemo(() => {
     const source =
@@ -145,6 +273,19 @@ function HotspotMap() {
       );
   }, [data]);
 
+  const clusterOptions = useMemo(
+    () => ({
+      showCoverageOnHover: false,
+      spiderfyOnMaxZoom: true,
+      maxClusterRadius: 60,
+      disableClusteringAtZoom: 13,
+      zoomToBoundsOnClick: true,
+      animate: true,
+      iconCreateFunction: createClusterIcon,
+    }),
+    [],
+  );
+
   const highRiskIncidents = useMemo(() => {
     return points.filter(isHeinousPoint).length;
   }, [points]);
@@ -155,16 +296,30 @@ function HotspotMap() {
     risk: "low",
   };
 
+  useEffect(() => {
+    if (loading || points.length === 0) {
+      return;
+    }
+
+    const guard = setTimeout(() => {
+      if (!tilesEverLoaded.current) {
+        setTilesFailed(true);
+      }
+    }, 6000);
+
+    return () => clearTimeout(guard);
+  }, [loading, points.length]);
+
   return (
     <div className="flex h-full min-h-0 flex-col bg-canvas">
       <PageHeader
         icon={MapPinned}
-        title="Crime Hotspot Map"
-        description="Geospatial distribution of FIR incidents across all districts"
+        title={t("pages.hotspots.title")}
+        description={t("pages.hotspots.description")}
       />
 
       <div className="grid min-h-0 flex-1 gap-5 overflow-y-auto p-5 xl:grid-cols-[minmax(0,1fr)_320px]">
-        <div className="netra-hud min-h-[600px] overflow-hidden rounded-2xl border border-edge-bright shadow-card">
+        <div className="netra-hud relative min-h-[600px] overflow-hidden rounded-2xl border border-edge-bright shadow-card">
           <div
             className="absolute inset-0 z-[500]"
             aria-hidden="true"
@@ -174,47 +329,37 @@ function HotspotMap() {
             <span className="netra-hud__corner netra-hud__corner--br" />
 
             <div
-              className="netra-hud__meta"
+              className="netra-hud__badges"
               style={{
                 position: "absolute",
-                top: 24,
-                right: 24,
+                top: 16,
+                right: 16,
               }}
             >
-              <span>GEOSPATIAL_TRACKING</span>
-              <strong>{formatNumber(points.length)} MAPPED</strong>
-            </div>
-
-            <div className="netra-hud__rings">
-              <span className="netra-hud__ring" />
-              <span className="netra-hud__ring netra-hud__ring--inner" />
-              <span className="netra-hud__center">
-                <Crosshair size={22} />
+              <span className="netra-hud__pill">
+                {formatNumber(points.length)} MAPPED
               </span>
-              <span
-                className="netra-hud__blip"
-                style={{ top: "20%", left: "58%" }}
-              />
-              <span
-                className="netra-hud__blip netra-hud__blip--alt"
-                style={{ top: "62%", left: "30%" }}
-              />
-              <span
-                className="netra-hud__blip"
-                style={{ top: "44%", left: "78%" }}
-              />
             </div>
 
-            <div className="netra-hud__footer">
-              <span>SYNC_OK</span>
-              <span>{clusters.length} CLUSTERS</span>
+            <div className="netra-hud__badges netra-hud__badges--bottom">
+              <span className="netra-hud__pill netra-hud__pill--status">
+                <span className="netra-hud__pulse" />
+                Live sync
+              </span>
+
+              <span className="netra-hud__pill">
+                {formatNumber(clusters.length)} district{" "}
+                {clusters.length === 1
+                  ? "cluster"
+                  : "clusters"}
+              </span>
             </div>
           </div>
 
           {loading ? (
             <div className="flex h-full min-h-[600px] items-center justify-center bg-surface">
               <p className="text-sm text-ink-secondary">
-                Loading geospatial FIR records...
+                {t("common.loadingDataset")}
               </p>
             </div>
           ) : error ? (
@@ -229,28 +374,35 @@ function HotspotMap() {
                 </p>
               </div>
             </div>
-          ) : clusters.length === 0 ? (
+          ) : points.length === 0 ? (
             <div className="flex h-full min-h-[600px] items-center justify-center bg-surface">
               <p className="text-sm text-ink-secondary">
                 No mapped district records are available.
               </p>
             </div>
           ) : (
-            <MapContainer
-              center={getMapCentre(clusters)}
+            <>
+              <MapContainer
+              center={KARNATAKA_CENTER}
               zoom={7}
-              className="h-full min-h-[600px] w-full"
+              minZoom={6}
+              maxZoom={16}
+              className="netra-map h-full min-h-[600px] w-full"
+              zoomControl={true}
             >
               <TileLayer
-                attribution="&copy; OpenStreetMap contributors"
+                ref={tileLayerRef}
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                subdomains="abc"
+                maxZoom={19}
               />
 
-              <FitMapToClusters clusters={clusters} />
+              <FitKarnataka points={points} />
 
               {clusters.map((cluster) => (
                 <CircleMarker
-                  key={cluster.id}
+                  key={`district-${cluster.id}`}
                   center={[
                     cluster.latitude,
                     cluster.longitude,
@@ -266,10 +418,36 @@ function HotspotMap() {
                     fillColor: getRiskColour(
                       cluster.risk,
                     ),
-                    fillOpacity: 0.72,
-                    weight: 2,
+                    fillOpacity: 0.22,
+                    weight: 1.5,
+                    dashArray: "4 4",
                   }}
                 >
+                  <Tooltip
+                    direction="top"
+                    offset={[0, -6]}
+                    opacity={1}
+                  >
+                    <div className="min-w-44">
+                      <strong>
+                        {cluster.districtName}
+                      </strong>
+
+                      <p className="mt-1 text-xs">
+                        Registered cases:{" "}
+                        <strong>
+                          {formatNumber(
+                            cluster.count,
+                          )}
+                        </strong>
+                      </p>
+
+                      <p className="text-xs">
+                        Risk: {formatRisk(cluster.risk)}
+                      </p>
+                    </div>
+                  </Tooltip>
+
                   <Popup>
                     <div className="min-w-52">
                       <strong>
@@ -300,7 +478,83 @@ function HotspotMap() {
                   </Popup>
                 </CircleMarker>
               ))}
+
+              <MarkerClusterGroup {...clusterOptions}>
+                {points.map((point) => (
+                  <Marker
+                    key={point.id}
+                    position={[
+                      point.latitude,
+                      point.longitude,
+                    ]}
+                    icon={
+                      isHeinousPoint(point)
+                        ? POINT_ICON_HEINOUS
+                        : POINT_ICON
+                    }
+                  >
+                    <Tooltip
+                      direction="top"
+                      offset={[0, -6]}
+                      opacity={1}
+                    >
+                      <div className="min-w-44">
+                        <strong>
+                          {point.districtName}
+                        </strong>
+
+                        <p className="mt-1 text-xs">
+                          {point.crimeNo}
+                        </p>
+
+                        <p className="text-xs">
+                          {point.crimeHeadName}
+                        </p>
+
+                        <p className="text-xs">
+                          {formatDate(point.date)}
+                        </p>
+                      </div>
+                    </Tooltip>
+
+                    <Popup>
+                      <div className="min-w-52">
+                        <strong>
+                          {point.districtName}
+                        </strong>
+
+                        <p>
+                          {point.crimeNo}
+                        </p>
+
+                        <p>
+                          {point.crimeHeadName}
+                        </p>
+
+                        <p>
+                          {formatDate(point.date)}
+                        </p>
+                      </div>
+                    </Popup>
+                  </Marker>
+                ))}
+              </MarkerClusterGroup>
             </MapContainer>
+
+            {tilesFailed && (
+              <div className="netra-map-tiles-fallback">
+                <ShieldAlert size={24} />
+
+                <p className="text-sm font-semibold text-ink">
+                  Map tiles are temporarily unavailable
+                </p>
+
+                <p className="text-sm text-ink-secondary">
+                  Please check your connection and try again.
+                </p>
+              </div>
+            )}
+              </>
           )}
         </div>
 
@@ -397,11 +651,12 @@ function HotspotMap() {
 
           <div className="rounded-2xl border border-edge bg-surface p-4 shadow-card">
             <p className="text-xs leading-5 text-ink-muted">
-              District markers are calculated from
-              CaseMaster records linked to police
-              stations and districts. Marker size
-              represents relative case concentration.
-              The data is synthetic and does not
+              Incident markers are grouped by
+              proximity; cluster circles show the
+              number of cases and expand as you zoom.
+              Dotted district outlines reflect case
+              concentration by police district. The
+              data is synthetic and does not
               represent real police incidents.
             </p>
           </div>
@@ -409,28 +664,6 @@ function HotspotMap() {
       </div>
     </div>
   );
-}
-
-function FitMapToClusters({ clusters }) {
-  const map = useMap();
-
-  useEffect(() => {
-    if (!clusters.length) {
-      return;
-    }
-
-    const bounds = clusters.map((cluster) => [
-      cluster.latitude,
-      cluster.longitude,
-    ]);
-
-    map.fitBounds(bounds, {
-      padding: [30, 30],
-      maxZoom: 8,
-    });
-  }, [clusters, map]);
-
-  return null;
 }
 
 function isHeinousPoint(point) {
@@ -471,16 +704,28 @@ function normalizeRisk(value) {
   return "low";
 }
 
+function getClusterColour(count) {
+  if (count >= 100) {
+    return CLUSTER_HIGH;
+  }
+
+  if (count >= 70) {
+    return CLUSTER_MEDIUM;
+  }
+
+  return CLUSTER_LOW;
+}
+
 function getRiskColour(risk) {
   if (risk === "high") {
-    return "#ef4444";
+    return CLUSTER_HIGH;
   }
 
   if (risk === "medium") {
-    return "#f59e0b";
+    return CLUSTER_MEDIUM;
   }
 
-  return "#22c55e";
+  return CLUSTER_LOW;
 }
 
 function formatRisk(risk) {
@@ -492,7 +737,7 @@ function formatRisk(risk) {
 
 function calculateRadius(count, clusters) {
   if (!clusters.length) {
-    return 8;
+    return 10;
   }
 
   const maximum = Math.max(
@@ -509,36 +754,14 @@ function calculateRadius(count, clusters) {
   );
 
   if (maximum === minimum) {
-    return 14;
+    return 16;
   }
 
   const normalized =
     (toNumber(count) - minimum) /
     (maximum - minimum);
 
-  return 8 + normalized * 12;
-}
-
-function getMapCentre(clusters) {
-  if (!clusters.length) {
-    return [14.5, 76.2];
-  }
-
-  const latitude =
-    clusters.reduce(
-      (sum, cluster) =>
-        sum + cluster.latitude,
-      0,
-    ) / clusters.length;
-
-  const longitude =
-    clusters.reduce(
-      (sum, cluster) =>
-        sum + cluster.longitude,
-      0,
-    ) / clusters.length;
-
-  return [latitude, longitude];
+  return 10 + normalized * 16;
 }
 
 function calculateShare(value, total) {
@@ -550,6 +773,24 @@ function calculateShare(value, total) {
     (toNumber(value) / total) *
     100
   ).toFixed(1);
+}
+
+function formatDate(value) {
+  if (!value) {
+    return "Date not available";
+  }
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return String(value);
+  }
+
+  return date.toLocaleDateString("en-IN", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
 }
 
 function formatNumber(value) {

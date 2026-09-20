@@ -17,6 +17,7 @@ import {
 
 import { addAuditLog } from "../utils/auditLogger";
 import { api } from "../services/api";
+import { useI18n } from "../i18n";
 
 function createId() {
   if (typeof crypto !== "undefined" && crypto.randomUUID) {
@@ -80,6 +81,8 @@ function getOffenders(response) {
 }
 
 function AICrimeAssistant() {
+  const { t } = useI18n();
+
   const [question, setQuestion] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [contextLoading, setContextLoading] = useState(true);
@@ -949,18 +952,16 @@ function AICrimeAssistant() {
               />
 
               <h1 className="text-xl font-bold tracking-tight text-ink md:text-2xl">
-                NETRA AI Copilot
+                {t("pages.assistant.title")}
               </h1>
 
               <span className="rounded-full border border-secondary/40 bg-secondary/10 px-3 py-1 text-xs font-medium text-violet-300">
-                Dataset Intelligence
+                {t("pages.assistant.badge")}
               </span>
             </div>
 
             <p className="mt-2 text-sm text-ink-secondary">
-              Dataset-grounded crime investigation
-              assistant and intelligence analysis
-              engine
+              {t("pages.assistant.description")}
             </p>
           </div>
         </div>

@@ -21,8 +21,10 @@ import PageHeader from "../components/common/PageHeader";
 import clsx from "clsx";
 import { useApi } from "../hooks/useApi";
 import { api } from "../services/api";
+import { useI18n } from "../i18n";
 
 function CrimeTrends() {
+  const { t } = useI18n();
   const {
     data: dashboardResponse,
     loading: dashboardLoading,
@@ -148,8 +150,8 @@ function CrimeTrends() {
     <div className="flex h-full min-h-0 flex-col bg-canvas">
       <PageHeader
         icon={BarChart3}
-        title="Crime Trends"
-        description="Analyse changes in crime volume, categories and case resolution"
+        title={t("pages.trends.title")}
+        description={t("pages.trends.description")}
       />
 
       <main className="min-h-0 flex-1 overflow-y-auto p-5">
@@ -161,7 +163,7 @@ function CrimeTrends() {
 
         <div className="grid gap-4 md:grid-cols-3">
           <Metric
-            title="Total cases"
+            title={t("pages.trends.totalCases")}
             value={
               loading
                 ? "..."
@@ -169,8 +171,8 @@ function CrimeTrends() {
             }
             change={
               loading
-                ? "Loading dataset..."
-                : "Live dataset"
+                ? t("common.loadingDataset")
+                : t("common.liveDataset")
             }
             icon={TrendingUp}
             tone="primary"
@@ -178,7 +180,7 @@ function CrimeTrends() {
           />
 
           <Metric
-            title="Cases solved"
+            title={t("pages.trends.solved")}
             value={
               loading
                 ? "..."
@@ -195,7 +197,7 @@ function CrimeTrends() {
           />
 
           <Metric
-            title="Unresolved cases"
+            title={t("pages.trends.unresolved")}
             value={
               loading
                 ? "..."
@@ -215,7 +217,7 @@ function CrimeTrends() {
         </div>
 
         <div className="mt-5 grid gap-5 xl:grid-cols-2">
-          <ChartCard title="Monthly case trend">
+          <ChartCard title={t("pages.trends.monthlyTrend")}>
             {loading ? (
               <ChartLoading />
             ) : monthlyCrimeTrend.length === 0 ? (
@@ -297,7 +299,7 @@ function CrimeTrends() {
             )}
           </ChartCard>
 
-          <ChartCard title="Cases by crime category">
+          <ChartCard title={t("pages.trends.byCategory")}>
             {loading ? (
               <ChartLoading />
             ) : crimeCategoryData.length ===

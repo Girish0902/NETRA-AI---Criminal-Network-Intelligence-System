@@ -16,6 +16,7 @@ import { useMemo, useState } from "react";
 import PageHeader from "../components/common/PageHeader";
 import { useApi } from "../hooks/useApi";
 import { api } from "../services/api";
+import { useI18n } from "../i18n";
 
 const resourceGroups = [
   {
@@ -71,6 +72,8 @@ const resourceGroups = [
 ];
 
 function Resources() {
+  const { t } = useI18n();
+
   const {
     data: response,
     loading,
@@ -189,8 +192,8 @@ function Resources() {
     <div className="flex h-full min-h-0 flex-col bg-canvas">
       <PageHeader
         icon={Database}
-        title="Resources"
-        description="Dataset documentation, schema references and platform guidance"
+        title={t("pages.resources.title")}
+        description={t("pages.resources.description")}
       />
 
       <main className="min-h-0 flex-1 overflow-y-auto p-5">

@@ -19,8 +19,10 @@ import {
 import PageHeader from "../components/common/PageHeader";
 import { useApi } from "../hooks/useApi";
 import { api } from "../services/api";
+import { useI18n } from "../i18n";
 
 function PredictiveIntelligence() {
+  const { t } = useI18n();
   const {
     data: predictiveResponse,
     loading,
@@ -75,11 +77,11 @@ function PredictiveIntelligence() {
     <div className="flex h-full min-h-0 flex-col bg-canvas">
       <PageHeader
         icon={BrainCircuit}
-        title="Predictive Intelligence"
-        description="Forecast crime patterns and identify emerging operational risks"
+        title={t("pages.predictions.title")}
+        description={t("pages.predictions.description")}
         action={
           <span className="max-w-72 truncate rounded-full border border-primary/30 bg-primary/10 px-4 py-2 text-xs font-semibold text-primary-hover">
-            {loading ? "Loading model..." : modelName}
+            {loading ? t("common.loadingModel") : modelName}
           </span>
         }
       />
@@ -93,7 +95,7 @@ function PredictiveIntelligence() {
 
         <div className="grid gap-4 md:grid-cols-3">
           <Metric
-            title="High-risk districts"
+            title={t("pages.predictions.highRiskDistricts")}
             value={
               loading
                 ? "..."
@@ -103,7 +105,7 @@ function PredictiveIntelligence() {
           />
 
           <Metric
-            title="Expected case change"
+            title={t("pages.predictions.expectedChange")}
             value={
               loading
                 ? "..."
@@ -115,7 +117,7 @@ function PredictiveIntelligence() {
           />
 
           <Metric
-            title="Highest forecast district"
+            title={t("pages.predictions.highestForecast")}
             value={
               loading
                 ? "..."
@@ -404,6 +406,8 @@ function Metric({
 }
 
 function PredictionCard({ prediction }) {
+  const { t } = useI18n();
+
   const isIncreasing =
     prediction.changePercent > 0;
 
@@ -436,21 +440,21 @@ function PredictionCard({ prediction }) {
 
       <div className="mt-5 grid grid-cols-2 gap-3">
         <DataBox
-          label="Predicted next month"
+          label={t("pages.predictions.predictedNextMonth")}
           value={formatNumber(
             prediction.predictedCases,
           )}
         />
 
         <DataBox
-          label="Previous monthly average"
+          label={t("pages.predictions.previousMonthlyAverage")}
           value={formatNumber(
             prediction.previousCases,
           )}
         />
 
         <DataBox
-          label="Forecast change"
+          label={t("pages.predictions.forecastChange")}
           value={formatSignedPercentage(
             prediction.changePercent,
           )}

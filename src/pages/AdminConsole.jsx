@@ -22,6 +22,7 @@ import { useAuth } from "../context/AuthContext";
 import { isAdminRole } from "../utils/roles";
 import { caseRecords } from "../data/caseRecords";
 import { addAuditLog } from "../utils/auditLogger";
+import { useI18n } from "../i18n";
 
 const INVESTIGATORS_KEY = "NETRA-admin-investigators";
 const CASE_STATE_KEY = "NETRA-admin-case-state";
@@ -58,6 +59,7 @@ function readJson(key, fallback) {
 
 function AdminConsole() {
   const { user } = useAuth();
+  const { t } = useI18n();
   const admin = isAdminRole(user?.role);
 
   const [investigators, setInvestigators] =
@@ -125,8 +127,8 @@ function AdminConsole() {
       <div className="flex h-full min-h-0 flex-col bg-canvas">
         <PageHeader
           icon={ShieldCheck}
-          title="Admin Console"
-          description="Restricted to administrator accounts"
+          title={t("pages.admin.title")}
+          description={t("pages.admin.descriptionRestricted")}
         />
 
         <main className="min-h-0 flex-1 overflow-y-auto p-5">
@@ -244,8 +246,8 @@ function AdminConsole() {
     <div className="flex h-full min-h-0 flex-col bg-canvas">
       <PageHeader
         icon={ShieldCheck}
-        title="Admin Console"
-        description="User management, case assignment, access approvals and case lifecycle"
+        title={t("pages.admin.title")}
+        description={t("pages.admin.description")}
         action={
           <div className="flex items-center gap-3">
             <Link

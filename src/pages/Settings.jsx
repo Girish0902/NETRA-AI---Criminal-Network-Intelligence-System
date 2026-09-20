@@ -16,12 +16,13 @@ import {
 import PageHeader from "../components/common/PageHeader";
 import { api } from "../services/api";
 import { addAuditLog } from "../utils/auditLogger";
+import { useI18n } from "../i18n";
 
 const SETTINGS_KEY = "NETRA-settings";
 const SETTINGS_EVENT = "NETRA-settings-updated";
 
 const DEFAULT_SETTINGS = {
-  language: "English + ಕನ್ನಡ",
+  language: "en",
   dateRange: "Last 30 days",
   compactInterface: false,
 
@@ -56,6 +57,8 @@ function loadSavedSettings() {
 }
 
 function Settings() {
+  const { t, locale, setLocale } = useI18n();
+
   const [settings, setSettings] =
     useState(loadSavedSettings);
 
@@ -339,8 +342,8 @@ function Settings() {
     <div className="flex h-full min-h-0 flex-col bg-canvas">
       <PageHeader
         icon={Database}
-        title="Settings"
-        description="Configure interface, alerts, security and dataset preferences"
+        title={t("pages.settingsPage.title")}
+        description={t("pages.settingsPage.description")}
         action={
           <div className="flex gap-3">
             <button
@@ -349,7 +352,7 @@ function Settings() {
               className="flex items-center gap-2 rounded-xl border border-secondary/30 bg-surface px-4 py-2.5 text-sm font-medium text-slate-300 transition hover:border-secondary hover:text-violet-200"
             >
               <RotateCcw size={17} />
-              Reset
+              {t("pages.settingsPage.reset")}
             </button>
 
             <button
@@ -359,7 +362,7 @@ function Settings() {
               className="flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-medium text-white transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-40"
             >
               <Save size={17} />
-              Save settings
+              {t("pages.settingsPage.save")}
             </button>
           </div>
         }
@@ -381,30 +384,38 @@ function Settings() {
         <div className="grid gap-5 xl:grid-cols-2">
           <SettingsCard
             icon={Languages}
-            title="Language and display"
-            description="Configure the dashboard interface."
+            title={t(
+              "pages.settingsPage.languageTitle",
+            )}
+            description={t(
+              "pages.settingsPage.languageDescription",
+            )}
           >
-            <SettingField label="Default language">
+            <SettingField
+              label={t(
+                "pages.settingsPage.defaultLanguage",
+              )}
+            >
               <select
-                value={settings.language}
-                onChange={(event) =>
-                  updateSetting(
-                    "language",
-                    event.target.value,
-                  )
-                }
+                value={locale}
+                onChange={(event) => {
+                  const next = event.target.value;
+
+                  setLocale(next);
+                  updateSetting("language", next);
+                }}
                 className="settings-select"
               >
-                <option value="English">
+                <option value="en">
                   English
                 </option>
 
-                <option value="ಕನ್ನಡ">
-                  ಕನ್ನಡ
+                <option value="hi">
+                  हिन्दी
                 </option>
 
-                <option value="English + ಕನ್ನಡ">
-                  English + ಕನ್ನಡ
+                <option value="kn">
+                  ಕನ್ನಡ
                 </option>
               </select>
             </SettingField>

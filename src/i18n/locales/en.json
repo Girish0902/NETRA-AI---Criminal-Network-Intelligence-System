@@ -1,0 +1,222 @@
+{
+  "brand": {
+    "tagline": "Network Entity Tracking & Relational Analytics",
+    "sublabel": "Criminal Network Intelligence"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "aiAssistant": "AI Crime Assistant",
+    "hotspotMap": "Hotspot Map",
+    "crimeTrends": "Crime Trends",
+    "patternLibrary": "Pattern Library",
+    "criminalNetwork": "Criminal Network",
+    "repeatOffenders": "Repeat Offenders",
+    "predictiveIntelligence": "Predictive Intelligence",
+    "caseSearch": "Case Search",
+    "districtAnalysis": "District Analysis",
+    "alerts": "Alerts",
+    "caseAccessRequests": "Case Access Requests",
+    "adminConsole": "Admin Console",
+    "reports": "Reports",
+    "auditLogs": "Audit Logs",
+    "resources": "Resources",
+    "settings": "Settings"
+  },
+  "sidebar": {
+    "collapse": "Collapse sidebar",
+    "expand": "Expand sidebar"
+  },
+  "common": {
+    "language": "Language",
+    "loading": "Loading...",
+    "loadingModel": "Loading model...",
+    "liveDataset": "Live dataset",
+    "loadingDataset": "Loading dataset...",
+    "search": "Search",
+    "statePolice": "State Police",
+    "roleDefault": "Crime Intelligence Analyst",
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "viewAll": "View all",
+    "cases": "cases"
+  },
+  "topbar": {
+    "openNavigation": "Open navigation",
+    "searchPlaceholder": "Search case number, accused or district...",
+    "language": "Language",
+    "date": {
+      "last7Days": "Last 7 days",
+      "last30Days": "Last 30 days",
+      "last3Months": "Last 3 months",
+      "last6Months": "Last 6 months",
+      "last12Months": "Last 12 months",
+      "allTime": "All time"
+    },
+    "notifications": "Notifications",
+    "unreadCount": "{{count}} unread",
+    "markAllRead": "Mark all read",
+    "loadingAlerts": "Loading dataset alerts...",
+    "noAlerts": "No intelligence alerts are available.",
+    "new": "New",
+    "acknowledged": "Acknowledged",
+    "viewAllAlerts": "View all alerts",
+    "openProfile": "Open user profile",
+    "viewProfile": "View profile",
+    "logout": "Log out"
+  },
+  "auth": {
+    "platformLabel": "Crime Intelligence Platform",
+    "loginTitle": "AI-powered crime intelligence for safer and faster investigations.",
+    "loginSubtitle": "Access operational analytics, hotspot intelligence, repeat-offender analysis, and AI-generated investigative reports.",
+    "signInHeading": "Sign in",
+    "signInDescription": "Enter your authorised NETRA AI credentials.",
+    "signupTitle": "Role-based access for investigators and administrators."
+  },
+  "pages": {
+    "dashboard": {
+      "title": "Crime Intelligence Dashboard",
+      "description": "Historical and operational insights from FIR records",
+      "unavailable": "Dashboard unavailable",
+      "totalCases": "Total Registered Cases",
+      "activeInvestigations": "Active Investigations",
+      "heinousOffences": "Heinous Offences",
+      "highestCaseVolume": "Highest Case Volume",
+      "caseCategory": "Case Category Distribution",
+      "severity": "Offence Severity Distribution",
+      "casesOverTime": "Cases Over Time"
+    },
+    "assistant": {
+      "title": "NETRA AI Copilot",
+      "badge": "Dataset Intelligence",
+      "description": "Dataset-grounded crime investigation assistant and intelligence analysis engine",
+      "presets": "Investigation Presets"
+    },
+    "hotspots": {
+      "title": "Crime Hotspot Map",
+      "description": "Geospatial distribution of FIR incidents across all districts"
+    },
+    "trends": {
+      "title": "Crime Trends",
+      "description": "Analyse changes in crime volume, categories and case resolution",
+      "totalCases": "Total cases",
+      "solved": "Cases solved",
+      "unresolved": "Unresolved cases",
+      "monthlyTrend": "Monthly case trend",
+      "byCategory": "Cases by crime category"
+    },
+    "patterns": {
+      "title": "Pattern Intelligence Library",
+      "description": "Recurring modus operandi, suspicious clusters and case-instance patterns that feed similar-case suggestions",
+      "detected": "Detected patterns",
+      "recurring": "Recurring patterns",
+      "suspicious": "Suspicious patterns",
+      "referenced": "Cases referenced",
+      "empty": "No patterns in this category"
+    },
+    "network": {
+      "title": "Criminal Network",
+      "description": "Co-accused relationships derived from shared FIR records"
+    },
+    "repeatOffenders": {
+      "title": "Repeat Offenders",
+      "description": "Identify accused persons appearing across multiple FIR records"
+    },
+    "predictions": {
+      "title": "Predictive Intelligence",
+      "description": "Forecast crime patterns and identify emerging operational risks",
+      "highRiskDistricts": "High-risk districts",
+      "expectedChange": "Expected case change",
+      "highestForecast": "Highest forecast district",
+      "predictedNextMonth": "Predicted next month",
+      "previousMonthlyAverage": "Previous monthly average",
+      "forecastChange": "Forecast change"
+    },
+    "caseSearch": {
+      "title": "Case Search",
+      "description": "Search FIRs using case number, district, offence, accused or section"
+    },
+    "districts": {
+      "title": "District Analysis",
+      "description": "Compare case volume, resolution and high-risk incidents by district",
+      "districtsCovered": "Districts covered",
+      "totalCases": "Total cases",
+      "resolved": "Resolved cases",
+      "unresolved": "Unresolved cases",
+      "heinousOffences": "Heinous offences",
+      "heinousShare": "Heinous share",
+      "policeStations": "Police stations",
+      "officers": "Officers",
+      "leadingCrime": "Leading crime category",
+      "registeredCases": "registered cases"
+    },
+    "alerts": {
+      "title": "Intelligence Alerts",
+      "description": "Review emerging hotspots, unusual crime patterns and operational warnings",
+      "allAlerts": "All alerts",
+      "critical": "Critical",
+      "new": "New",
+      "acknowledged": "Acknowledged"
+    },
+    "reports": {
+      "title": "Reports",
+      "description": "Generate operational intelligence reports from FIR records"
+    },
+    "resources": {
+      "title": "Resources",
+      "description": "Dataset documentation, schema references and platform guidance"
+    },
+    "auditLogs": {
+      "title": "Audit Logs",
+      "description": "Track data access, AI queries, reports and security-related activity",
+      "totalActivities": "Total activities",
+      "successful": "Successful",
+      "denied": "Denied",
+      "aiQueries": "AI queries"
+    },
+    "admin": {
+      "title": "Admin Console",
+      "description": "User management, case assignment, access approvals and case lifecycle",
+      "descriptionRestricted": "Restricted to administrator accounts"
+    },
+    "caseOverview": {
+      "title": "Case Overview",
+      "description": "Consolidated case intelligence for a single FIR record",
+      "notFoundTitle": "Case not found",
+      "notFoundDescription": "The requested FIR record could not be located in the demonstration dataset.",
+      "noSuchCase": "No such case record"
+    },
+    "accessRequests": {
+      "title": "Case Access Requests",
+      "titleRequest": "Request Case Access",
+      "description": "Approve or reject investigator requests to view restricted case records",
+      "descriptionRequest": "Study a case before requesting access for investigation work",
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "approvalQueue": "Approval queue"
+    },
+    "profile": {
+      "title": "User Profile",
+      "description": "Review and update your authorised NETRA AI account"
+    },
+    "notFound": {
+      "accessDenied": "Access denied",
+      "pageNotFound": "Page not found",
+      "accessDeniedDescription": "This area is restricted to administrator accounts. Your session was declined access to this route.",
+      "noRoute": "No route matches",
+      "returnToDashboard": "Return to dashboard",
+      "signIn": "Sign in"
+    },
+    "settingsPage": {
+      "title": "Settings",
+      "description": "Configure interface, alerts, security and dataset preferences",
+      "languageTitle": "Language and display",
+      "languageDescription": "Configure the dashboard interface.",
+      "defaultLanguage": "Default language",
+      "defaultDateRange": "Default date range",
+      "reset": "Reset",
+      "save": "Save settings"
+    }
+  }
+}

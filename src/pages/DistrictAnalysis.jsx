@@ -15,8 +15,10 @@ import { Building2 } from "lucide-react";
 
 import PageHeader from "../components/common/PageHeader";
 import { api } from "../services/api";
+import { useI18n } from "../i18n";
 
 function DistrictAnalysis() {
+  const { t } = useI18n();
   const [districtData, setDistrictData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -149,8 +151,8 @@ function DistrictAnalysis() {
     <div className="flex h-full min-h-0 flex-col bg-canvas">
       <PageHeader
         icon={Building2}
-        title="District Analysis"
-        description="Compare case volume, resolution and high-risk incidents by district"
+        title={t("pages.districts.title")}
+        description={t("pages.districts.description")}
       />
 
       <main className="min-h-0 flex-1 overflow-y-auto p-5">
@@ -162,7 +164,7 @@ function DistrictAnalysis() {
 
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
           <Summary
-            title="Districts covered"
+            title={t("pages.districts.districtsCovered")}
             value={
               loading
                 ? "..."
@@ -171,7 +173,7 @@ function DistrictAnalysis() {
           />
 
           <Summary
-            title="Total cases"
+            title={t("pages.districts.totalCases")}
             value={
               loading
                 ? "..."
@@ -180,7 +182,7 @@ function DistrictAnalysis() {
           />
 
           <Summary
-            title="Resolved cases"
+            title={t("pages.districts.resolved")}
             value={
               loading
                 ? "..."
@@ -189,7 +191,7 @@ function DistrictAnalysis() {
           />
 
           <Summary
-            title="Unresolved cases"
+            title={t("pages.districts.unresolved")}
             value={
               loading
                 ? "..."
@@ -198,7 +200,7 @@ function DistrictAnalysis() {
           />
 
           <Summary
-            title="Heinous offences"
+            title={t("pages.districts.heinousOffences")}
             value={
               loading
                 ? "..."
@@ -529,6 +531,8 @@ function isUnresolvedStatus(value) {
 }
 
 function DistrictCard({ district }) {
+  const { t } = useI18n();
+
   return (
     <article className="rounded-2xl border border-edge bg-surface p-5">
       <div className="flex items-start justify-between gap-3">
@@ -537,53 +541,53 @@ function DistrictCard({ district }) {
         </h2>
 
         <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary-hover">
-          {district.resolutionRate}% resolved
+          {district.resolutionRate}% {t("pages.districts.resolved")}
         </span>
       </div>
 
       <div className="mt-5 space-y-3">
         <DataRow
-          label="Total cases"
+          label={t("pages.districts.totalCases")}
           value={formatNumber(
             district.totalCases,
           )}
         />
 
         <DataRow
-          label="Resolved cases"
+          label={t("pages.districts.resolved")}
           value={formatNumber(
             district.resolvedCases,
           )}
         />
 
         <DataRow
-          label="Unresolved cases"
+          label={t("pages.districts.unresolved")}
           value={formatNumber(
             district.unresolvedCases,
           )}
         />
 
         <DataRow
-          label="Heinous offences"
+          label={t("pages.districts.heinousOffences")}
           value={formatNumber(
             district.heinousCases,
           )}
         />
 
         <DataRow
-          label="Heinous share"
+          label={t("pages.districts.heinousShare")}
           value={`${district.heinousRate}%`}
         />
 
         <DataRow
-          label="Police stations"
+          label={t("pages.districts.policeStations")}
           value={formatNumber(
             district.policeStations,
           )}
         />
 
         <DataRow
-          label="Officers"
+          label={t("pages.districts.officers")}
           value={formatNumber(
             district.officers,
           )}
@@ -592,7 +596,7 @@ function DistrictCard({ district }) {
 
       <div className="mt-5 rounded-xl bg-surface p-3">
         <p className="text-xs text-ink-muted">
-          Leading crime category
+          {t("pages.districts.leadingCrime")}
         </p>
 
         <p className="mt-1 text-sm font-semibold text-white">
@@ -603,7 +607,7 @@ function DistrictCard({ district }) {
           {formatNumber(
             district.leadingCrimeCount,
           )}{" "}
-          registered cases
+          {t("pages.districts.registeredCases")}
         </p>
       </div>
     </article>

@@ -8,8 +8,11 @@ import {
 } from "react-router-dom";
 
 import { useAuth } from "../context/AuthContext";
+import { useI18n } from "../i18n";
 
 function NotFound() {
+  const { t } = useI18n();
+
   const location = useLocation();
   const { isAuthenticated } = useAuth();
 
@@ -42,14 +45,14 @@ function NotFound() {
 
         <h2 className="mt-2 text-lg font-semibold text-ink">
           {hasRoleGate
-            ? "Access denied"
-            : "Page not found"}
+            ? t("pages.notFound.accessDenied")
+            : t("pages.notFound.pageNotFound")}
         </h2>
 
         <p className="mt-3 text-sm leading-6 text-ink-muted">
           {hasRoleGate
-            ? "This area is restricted to administrator accounts. Your session was declined access to this route."
-            : `No route matches "${location.pathname}". The link may be outdated or the page may have moved.`}
+            ? t("pages.notFound.accessDeniedDescription")
+            : `${t("pages.notFound.noRoute")} "${location.pathname}". The link may be outdated or the page may have moved.`}
         </p>
 
         <div className="mt-7 flex items-center justify-center gap-3">
@@ -57,7 +60,7 @@ function NotFound() {
             to="/dashboard"
             className="rounded-xl bg-primary px-5 py-3 text-sm font-medium text-white transition hover:bg-primary-hover"
           >
-            Return to dashboard
+            {t("pages.notFound.returnToDashboard")}
           </Link>
 
           {!isAuthenticated && (
@@ -65,7 +68,7 @@ function NotFound() {
               to="/login"
               className="rounded-xl border border-edge px-5 py-3 text-sm font-medium text-ink-secondary transition hover:border-primary/40 hover:text-ink"
             >
-              Sign in
+              {t("pages.notFound.signIn")}
             </Link>
           )}
         </div>

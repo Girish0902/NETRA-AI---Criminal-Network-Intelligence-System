@@ -16,6 +16,7 @@ import Panel from "../components/ui/Panel";
 import StatCard from "../components/ui/StatCard";
 import MonoLabel from "../components/ui/MonoLabel";
 import { useAuth } from "../context/AuthContext";
+import { useI18n } from "../i18n";
 import { isAdminRole } from "../utils/roles";
 import { caseRecords } from "../data/caseRecords";
 import { addAuditLog } from "../utils/auditLogger";
@@ -76,6 +77,7 @@ function readRequests() {
 
 function AccessRequests() {
   const { user } = useAuth();
+  const { t } = useI18n();
   const [requests, setRequests] = useState(
     readRequests,
   );
@@ -199,20 +201,22 @@ function AccessRequests() {
         icon={KeyRound}
         title={
           admin
-            ? "Case Access Requests"
-            : "Request Case Access"
+            ? t("pages.accessRequests.title")
+            : t("pages.accessRequests.titleRequest")
         }
         description={
           admin
-            ? "Approve or reject investigator requests to view restricted case records"
-            : "Study a case before requesting access for investigation work"
+            ? t("pages.accessRequests.description")
+            : t(
+                "pages.accessRequests.descriptionRequest",
+              )
         }
       />
 
       <main className="min-h-0 flex-1 overflow-y-auto p-5">
         <div className="grid gap-4 sm:grid-cols-3">
           <StatCard
-            title="Pending"
+            title={t("pages.accessRequests.pending")}
             value={pendingRequests.length}
             description="Awaiting decision"
             icon={KeyRound}
@@ -220,7 +224,7 @@ function AccessRequests() {
           />
 
           <StatCard
-            title="Approved"
+            title={t("pages.accessRequests.approved")}
             value={approvedRequests.length}
             description="Access granted"
             icon={CheckCircle2}
@@ -228,7 +232,7 @@ function AccessRequests() {
           />
 
           <StatCard
-            title="Rejected"
+            title={t("pages.accessRequests.rejected")}
             value={deniedRequests.length}
             description="Access declined"
             icon={XCircle}
@@ -238,7 +242,11 @@ function AccessRequests() {
 
         <div className="mt-6 grid gap-5 xl:grid-cols-[minmax(0,1fr)_360px]">
           <Panel
-            title={admin ? "Approval queue" : "Request access"}
+            title={
+              admin
+                ? t("pages.accessRequests.approvalQueue")
+                : t("pages.accessRequests.titleRequest")
+            }
             subtitle={
               admin
                 ? `Route: Unassigned → Request access → Access granted`

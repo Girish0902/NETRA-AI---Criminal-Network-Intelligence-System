@@ -17,11 +17,14 @@ import { addAuditLog } from "../utils/auditLogger";
 
 import PageHeader from "../components/common/PageHeader";
 import { api } from "../services/api";
+import { useI18n } from "../i18n";
 
 const ACTIVITY_STORAGE_KEY =
   "NETRA-report-activity";
 
 function Reports() {
+  const { t } = useI18n();
+
   const [generatingReport, setGeneratingReport] =
     useState(null);
 
@@ -205,8 +208,8 @@ function Reports() {
     <div className="flex h-full min-h-0 flex-col bg-canvas">
       <PageHeader
         icon={FileText}
-        title="Reports"
-        description="Generate operational intelligence reports from FIR records"
+        title={t("pages.reports.title")}
+        description={t("pages.reports.description")}
       />
 
       <main className="min-h-0 flex-1 overflow-y-auto p-5">

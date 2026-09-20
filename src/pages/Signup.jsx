@@ -13,13 +13,17 @@ import {
   useNavigate,
 } from "react-router-dom";
 
+import netraLogo from "../assets/netra-logo.png";
 import { useAuth } from "../context/AuthContext";
+import { useI18n } from "../i18n";
 
 const DEMO_ACCOUNTS_KEY = "NETRA-signup-accounts";
 
 function Signup() {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
+
+  const { t } = useI18n();
 
   const [fullName, setFullName] = useState("");
   const [employeeId, setEmployeeId] =
@@ -115,8 +119,13 @@ function Signup() {
       <div className="grid w-full max-w-5xl overflow-hidden rounded-3xl border border-edge bg-surface shadow-2xl lg:grid-cols-2">
         <section className="hidden min-h-[680px] flex-col justify-between bg-gradient-to-br from-primary/25 via-surface to-canvas p-10 lg:flex">
           <div>
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-primary/30 bg-primary/10 text-primary-hover">
-              <ShieldCheck size={30} />
+            <div className="flex h-14 w-fit shrink-0 items-center justify-center rounded-2xl border border-primary/30 bg-primary/10 px-2">
+              <img
+                src={netraLogo}
+                alt="NETRA"
+                className="h-10 w-auto object-contain"
+                draggable="false"
+              />
             </div>
 
             <h1 className="mt-6 text-3xl font-bold text-ink">
@@ -124,17 +133,17 @@ function Signup() {
             </h1>
 
             <p className="mt-3 text-ink-secondary">
-              Crime Intelligence Platform
+              {t("auth.platformLabel")}
             </p>
           </div>
 
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary-hover">
-              Crime Intelligence Platform
+              {t("auth.platformLabel")}
             </p>
 
             <h2 className="mt-4 max-w-md text-3xl font-bold leading-tight text-ink">
-              Role-based access for investigators and administrators.
+              {t("auth.signupTitle")}
             </h2>
 
             <p className="mt-4 max-w-md text-sm leading-7 text-ink-secondary">
@@ -148,8 +157,13 @@ function Signup() {
         <section className="flex min-h-[680px] items-center p-7 sm:p-10">
           <div className="mx-auto w-full max-w-md">
             <div className="lg:hidden">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary-hover">
-                <ShieldCheck size={25} />
+              <div className="flex h-12 w-fit items-center justify-center rounded-xl bg-primary/10 px-1.5">
+                <img
+                  src={netraLogo}
+                  alt="NETRA"
+                  className="h-9 w-auto object-contain"
+                  draggable="false"
+                />
               </div>
             </div>
 

@@ -12,8 +12,10 @@ import { addAuditLog } from "../utils/auditLogger";
 
 import PageHeader from "../components/common/PageHeader";
 import { api } from "../services/api";
+import { useI18n } from "../i18n";
 
 function CaseSearch() {
+  const { t } = useI18n();
   const [searchParams, setSearchParams] =
     useSearchParams();
 
@@ -243,8 +245,8 @@ function CaseSearch() {
     <div className="flex h-full min-h-0 flex-col bg-canvas">
       <PageHeader
         icon={Search}
-        title="Case Search"
-        description="Search FIRs using case number, district, offence, accused or section"
+        title={t("pages.caseSearch.title")}
+        description={t("pages.caseSearch.description")}
       />
 
       <main className="min-h-0 flex-1 overflow-y-auto p-5">

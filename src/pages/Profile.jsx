@@ -16,8 +16,11 @@ import {
 import PageHeader from "../components/common/PageHeader";
 import { useAuth } from "../context/AuthContext";
 import { addAuditLog } from "../utils/auditLogger";
+import { useI18n } from "../i18n";
 
 function Profile() {
+  const { t } = useI18n();
+
   const {
     user,
     updateProfile,
@@ -90,8 +93,8 @@ function Profile() {
     <div className="flex h-full min-h-0 flex-col bg-canvas">
       <PageHeader
         icon={UserRound}
-        title="User Profile"
-        description="Review and update your authorised NETRA AI account"
+        title={t("pages.profile.title")}
+        description={t("pages.profile.description")}
       />
 
       <main className="min-h-0 flex-1 overflow-y-auto p-5">

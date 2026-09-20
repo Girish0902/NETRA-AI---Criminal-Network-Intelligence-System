@@ -1,0 +1,222 @@
+{
+  "brand": {
+    "tagline": "Network Entity Tracking & Relational Analytics",
+    "sublabel": "आपराधिक नेटवर्क खुफिया"
+  },
+  "nav": {
+    "dashboard": "डैशबोर्ड",
+    "aiAssistant": "एआई अपराध सहायक",
+    "hotspotMap": "अपराध हॉटस्पॉट मानचित्र",
+    "crimeTrends": "अपराध प्रवृत्तियाँ",
+    "patternLibrary": "पैटर्न लाइब्रेरी",
+    "criminalNetwork": "अपराधी नेटवर्क",
+    "repeatOffenders": "पुनः अपराधी",
+    "predictiveIntelligence": "पूर्वानुमान खुफिया",
+    "caseSearch": "मामला खोज",
+    "districtAnalysis": "जिला विश्लेषण",
+    "alerts": "अलर्ट",
+    "caseAccessRequests": "मामला पहुँच अनुरोध",
+    "adminConsole": "प्रशासक कंसोल",
+    "reports": "रिपोर्ट",
+    "auditLogs": "ऑडिट लॉग",
+    "resources": "संसाधन",
+    "settings": "सेटिंग्स"
+  },
+  "sidebar": {
+    "collapse": "साइडबार संक्षिप्त करें",
+    "expand": "साइडबार विस्तृत करें"
+  },
+  "common": {
+    "language": "भाषा",
+    "loading": "लोड हो रहा है...",
+    "loadingModel": "मॉडल लोड हो रहा है...",
+    "liveDataset": "लाइव डेटासेट",
+    "loadingDataset": "डेटासेट लोड हो रहा है...",
+    "search": "खोज",
+    "statePolice": "राज्य पुलिस",
+    "roleDefault": "अपराध खुफिया विश्लेषक",
+    "save": "सहेजें",
+    "cancel": "रद्द करें",
+    "close": "बंद करें",
+    "viewAll": "सभी देखें",
+    "cases": "मामले"
+  },
+  "topbar": {
+    "openNavigation": "नेविगेशन खोलें",
+    "searchPlaceholder": "मामला संख्या, अभियुक्त या जिला खोजें...",
+    "language": "भाषा",
+    "date": {
+      "last7Days": "पिछले 7 दिन",
+      "last30Days": "पिछले 30 दिन",
+      "last3Months": "पिछले 3 महीने",
+      "last6Months": "पिछले 6 महीने",
+      "last12Months": "पिछले 12 महीने",
+      "allTime": "सभी समय"
+    },
+    "notifications": "सूचनाएँ",
+    "unreadCount": "{{count}} बिना पढ़ी",
+    "markAllRead": "सभी को पढ़ा हुआ चिह्नित करें",
+    "loadingAlerts": "डेटासेट अलर्ट लोड हो रहे हैं...",
+    "noAlerts": "कोई खुफिया अलर्ट उपलब्ध नहीं है।",
+    "new": "नया",
+    "acknowledged": "स्वीकृत",
+    "viewAllAlerts": "सभी अलर्ट देखें",
+    "openProfile": "उपयोगकर्ता प्रोफ़ाइल खोलें",
+    "viewProfile": "प्रोफ़ाइल देखें",
+    "logout": "लॉग आउट"
+  },
+  "auth": {
+    "platformLabel": "अपराध खुफिया प्लेटफ़ॉर्म",
+    "loginTitle": "AI-संचालित अपराध खुफिया, सुरक्षित और त्वरित जाँच के लिए।",
+    "loginSubtitle": "परिचालन एनालिटिक्स, हॉटस्पॉट खुफिया, पुनः अपराधी विश्लेषण और AI-जनित अनुसंधान रिपोर्ट तक पहुँच।",
+    "signInHeading": "साइन इन करें",
+    "signInDescription": "अपने अधिकृत NETRA AI प्रमाणपत्र दर्ज करें।",
+    "signupTitle": "जाँचकर्ताओं और प्रशासकों के लिए भूमिका-आधारित पहुँच।"
+  },
+  "pages": {
+    "dashboard": {
+      "title": "अपराध खुफिया डैशबोर्ड",
+      "description": "FIR रिकॉर्ड्स से ऐतिहासिक और परिचालन जानकारी",
+      "unavailable": "डैशबोर्ड अनुपलब्ध",
+      "totalCases": "कुल दर्ज मामले",
+      "activeInvestigations": "सक्रिय जाँच",
+      "heinousOffences": "जघन्य अपराध",
+      "highestCaseVolume": "सर्वाधिक मामला दायरा",
+      "caseCategory": "मामला श्रेणी वितरण",
+      "severity": "अपराध गंभीरता वितरण",
+      "casesOverTime": "समय के साथ मामले"
+    },
+    "assistant": {
+      "title": "NETRA AI सह-पायलट",
+      "badge": "डेटासेट खुफिया",
+      "description": "डेटासेट-आधारित अपराध जाँच सहायक और खुफिया विश्लेषण इंजन",
+      "presets": "जाँच प्रीसेट"
+    },
+    "hotspots": {
+      "title": "अपराध हॉटस्पॉट मानचित्र",
+      "description": "सभी जिलों में FIR घटनाओं का भौगोलिक वितरण"
+    },
+    "trends": {
+      "title": "अपराध प्रवृत्तियाँ",
+      "description": "अपराध मात्रा, श्रेणियों और मामला निपटान में बदलाव का विश्लेषण करें",
+      "totalCases": "कुल मामले",
+      "solved": "हल किए गए मामले",
+      "unresolved": "लंबित मामले",
+      "monthlyTrend": "मासिक मामला प्रवृत्ति",
+      "byCategory": "अपराध श्रेणी के अनुसार मामले"
+    },
+    "patterns": {
+      "title": "पैटर्न खुफिया लाइब्रेरी",
+      "description": "आवर्ती तौर-तरीके, संदिग्ध समूह और मामला-उदाहरण पैटर्न जो समान-मामला सुझावों को फ़ीड करते हैं",
+      "detected": "ज्ञात पैटर्न",
+      "recurring": "आवर्ती पैटर्न",
+      "suspicious": "संदिग्ध पैटर्न",
+      "referenced": "संदर्भित मामले",
+      "empty": "इस श्रेणी में कोई पैटर्न नहीं"
+    },
+    "network": {
+      "title": "अपराधी नेटवर्क",
+      "description": "साझा FIR रिकॉर्ड से प्राप्त सह-अभियुक्त संबंध"
+    },
+    "repeatOffenders": {
+      "title": "पुनः अपराधी",
+      "description": "कई FIR रिकॉर्ड्स में दिखाई देने वाले अभियुक्तों की पहचान करें"
+    },
+    "predictions": {
+      "title": "पूर्वानुमान खुफिया",
+      "description": "अपराध पैटर्न का पूर्वानुमान करें और उभरते परिचालन जोखिमों की पहचान करें",
+      "highRiskDistricts": "उच्च-जोखिम जिले",
+      "expectedChange": "अपेक्षित मामला परिवर्तन",
+      "highestForecast": "सर्वाधिक पूर्वानुमान जिला",
+      "predictedNextMonth": "अगले महीने का पूर्वानुमान",
+      "previousMonthlyAverage": "पिछली मासिक औसत",
+      "forecastChange": "पूर्वानुमान परिवर्तन"
+    },
+    "caseSearch": {
+      "title": "मामला खोज",
+      "description": "मामला संख्या, जिला, अपराध, अभियुक्त या धारा से FIR खोजें"
+    },
+    "districts": {
+      "title": "जिला विश्लेषण",
+      "description": "जिले के अनुसार मामला मात्रा, निपटान और उच्च-जोखिम घटनाओं की तुलना करें",
+      "districtsCovered": "शामिल जिले",
+      "totalCases": "कुल मामले",
+      "resolved": "निपटाए गए मामले",
+      "unresolved": "लंबित मामले",
+      "heinousOffences": "जघन्य अपराध",
+      "heinousShare": "जघन्य हिस्सा",
+      "policeStations": "पुलिस थाने",
+      "officers": "अधिकारी",
+      "leadingCrime": "प्रमुख अपराध श्रेणी",
+      "registeredCases": "पंजीकृत मामले"
+    },
+    "alerts": {
+      "title": "खुफिया अलर्ट",
+      "description": "उभरते हॉटस्पॉट, असामान्य अपराध पैटर्न और परिचालन चेतावनियों की समीक्षा करें",
+      "allAlerts": "सभी अलर्ट",
+      "critical": "गंभीर",
+      "new": "नया",
+      "acknowledged": "स्वीकृत"
+    },
+    "reports": {
+      "title": "रिपोर्ट",
+      "description": "FIR रिकॉर्ड्स से परिचालन खुफिया रिपोर्ट उत्पन्न करें"
+    },
+    "resources": {
+      "title": "संसाधन",
+      "description": "डेटासेट दस्तावेज़ीकरण, स्कीमा संदर्भ और प्लेटफ़ॉर्म मार्गदर्शन"
+    },
+    "auditLogs": {
+      "title": "ऑडिट लॉग",
+      "description": "डेटा एक्सेस, AI क्वेरी, रिपोर्ट और सुरक्षा-संबंधी गतिविधि ट्रैक करें",
+      "totalActivities": "कुल गतिविधियाँ",
+      "successful": "सफल",
+      "denied": "अस्वीकृत",
+      "aiQueries": "AI क्वेरी"
+    },
+    "admin": {
+      "title": "प्रशासक कंसोल",
+      "description": "उपयोगकर्ता प्रबंधन, मामला असाइनमेंट, पहुँच अनुमोदन और मामला जीवनचक्र",
+      "descriptionRestricted": "केवल प्रशासक खातों के लिए प्रतिबंधित"
+    },
+    "caseOverview": {
+      "title": "मामला अवलोकन",
+      "description": "एकल FIR रिकॉर्ड के लिए समेकित मामला खुफिया",
+      "notFoundTitle": "मामला नहीं मिला",
+      "notFoundDescription": "अनुरोधित FIR रिकॉर्ड डेमो डेटासेट में नहीं मिल सका।",
+      "noSuchCase": "ऐसा कोई मामला रिकॉर्ड नहीं"
+    },
+    "accessRequests": {
+      "title": "मामला पहुँच अनुरोध",
+      "titleRequest": "मामला पहुँच अनुरोध करें",
+      "description": "प्रतिबंधित मामले के रिकॉर्ड देखने हेतु जाँचकर्ताओं के अनुरोध स्वीकृत या अस्वीकृत करें",
+      "descriptionRequest": "जाँच कार्य हेतु पहुँच माँगने से पहले एक मामले का अध्ययन करें",
+      "pending": "लंबित",
+      "approved": "स्वीकृत",
+      "rejected": "अस्वीकृत",
+      "approvalQueue": "अनुमोदन कतार"
+    },
+    "profile": {
+      "title": "उपयोगकर्ता प्रोफ़ाइल",
+      "description": "अपने अधिकृत NETRA AI खाते की समीक्षा और अद्यतन करें"
+    },
+    "notFound": {
+      "accessDenied": "पहुँच अस्वीकार",
+      "pageNotFound": "पृष्ठ नहीं मिला",
+      "accessDeniedDescription": "यह क्षेत्र केवल प्रशासक खातों के लिए प्रतिबंधित है। आपके सत्र को इस मार्ग तक पहुँच अस्वीकार कर दी गई है।",
+      "noRoute": "कोई मार्ग मेल नहीं खाता",
+      "returnToDashboard": "डैशबोर्ड पर लौटें",
+      "signIn": "साइन इन"
+    },
+    "settingsPage": {
+      "title": "सेटिंग्स",
+      "description": "इंटरफ़ेस, अलर्ट, सुरक्षा और डेटासेट प्राथमिकताएँ कॉन्फ़िगर करें",
+      "languageTitle": "भाषा और प्रदर्शन",
+      "languageDescription": "डैशबोर्ड इंटरफ़ेस कॉन्फ़िगर करें।",
+      "defaultLanguage": "डिफ़ॉल्ट भाषा",
+      "defaultDateRange": "डिफ़ॉल्ट तिथि सीमा",
+      "reset": "रीसेट",
+      "save": "सेटिंग्स सहेजें"
+    }
+  }
+}

@@ -28,6 +28,7 @@ import { api } from "../services/api";
 import DashboardTour from "../components/common/DashboardTour";
 import StatCard from "../components/ui/StatCard";
 import Panel from "../components/ui/Panel";
+import { useI18n } from "../i18n";
 import ErrorState from "../components/ui/ErrorState";
 import {
   calculatePercentage,
@@ -485,6 +486,8 @@ function RadarWeb({ data, total }) {
 function Dashboard() {
   const navigate = useNavigate();
 
+  const { t } = useI18n();
+
   const {
     data: dashboardResponse,
     loading: dashboardLoading,
@@ -573,8 +576,8 @@ function Dashboard() {
       <div data-tour="dashboard-header">
         <PageHeader
           icon={Activity}
-          title="Crime Intelligence Dashboard"
-          description="Historical and operational insights from FIR records"
+          title={t("pages.dashboard.title")}
+          description={t("pages.dashboard.description")}
           action={
             <button
               type="button"
@@ -591,7 +594,7 @@ function Dashboard() {
         {error && (
           <div className="mb-5">
             <ErrorState
-              title="Dashboard unavailable"
+              title={t("pages.dashboard.unavailable")}
               message={`The intelligence feed could not be reached (${String(
                 error,
               )}). Showing demonstration indicators based on the loaded dataset sample.`}
@@ -605,7 +608,7 @@ function Dashboard() {
           className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
         >
           <StatCard
-            title="Total Registered Cases"
+            title={t("pages.dashboard.totalCases")}
             value={
               loading
                 ? "..."
@@ -645,7 +648,7 @@ function Dashboard() {
           />
 
           <StatCard
-            title="Active Investigations"
+            title={t("pages.dashboard.activeInvestigations")}
             value={
               loading
                 ? "..."
@@ -676,7 +679,7 @@ function Dashboard() {
           />
 
           <StatCard
-            title="Heinous Offences"
+            title={t("pages.dashboard.heinousOffences")}
             value={
               loading
                 ? "..."
@@ -705,7 +708,7 @@ function Dashboard() {
           />
 
           <StatCard
-            title="Highest Case Volume"
+            title={t("pages.dashboard.highestCaseVolume")}
             value={
               loading
                 ? "..."
@@ -736,7 +739,7 @@ function Dashboard() {
 
         <div className="mt-5 grid gap-5 xl:grid-cols-5">
           <Panel
-            title="Case Category Distribution"
+            title={t("pages.dashboard.caseCategory")}
             subtitle={`share of ${formatNumber(
               donutTotal,
             )} total`}
@@ -761,7 +764,7 @@ function Dashboard() {
           </Panel>
 
           <Panel
-            title="Offence Severity Distribution"
+            title={t("pages.dashboard.severity")}
             bodyClassName="p-3"
             className="xl:col-span-3"
           >
@@ -859,7 +862,7 @@ function Dashboard() {
 
         <div className="mt-5">
           <Panel
-            title="Cases Over Time"
+            title={t("pages.dashboard.casesOverTime")}
             bodyClassName="p-3"
           >
             <div data-tour="time-chart">

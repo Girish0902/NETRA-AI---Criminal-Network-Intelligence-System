@@ -1,18 +1,22 @@
-import { ChevronLeft, ChevronRight, ShieldCheck } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import {
   primaryNavigation,
   secondaryNavigation,
 } from "../../config/navigation";
+import netraLogo from "../../assets/netra-logo.png";
+import { useI18n } from "../../i18n";
 
 function SidebarLink({ item, collapsed }) {
   const Icon = item.icon;
+  const { t } = useI18n();
+  const label = t(`nav.${item.key}`);
 
   return (
     <NavLink
       to={item.path}
       end={item.path === "/"}
-      title={collapsed ? item.label : undefined}
+      title={collapsed ? label : undefined}
       className={({ isActive }) =>
         [
           "group relative flex min-h-11 items-center rounded-xl border px-3",
@@ -47,7 +51,7 @@ function SidebarLink({ item, collapsed }) {
 
           {!collapsed && (
             <span className="truncate text-sm font-medium">
-              {item.label}
+              {label}
             </span>
           )}
         </>
@@ -71,6 +75,8 @@ function SidebarSection({ items, collapsed }) {
 }
 
 export default function Sidebar({ collapsed, onToggle }) {
+  const { t } = useI18n();
+
   return (
     <aside
       className={[
@@ -87,11 +93,12 @@ export default function Sidebar({ collapsed, onToggle }) {
             collapsed ? "justify-center" : "gap-3",
           ].join(" ")}
         >
-          <div className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-primary/30 bg-gradient-to-br from-primary/25 to-accent/10 shadow-glow-primary">
-            <ShieldCheck
-              size={27}
-              className="text-primary-hover"
-              aria-hidden="true"
+          <div className="flex h-11 shrink-0 items-center px-0.5">
+            <img
+              src={netraLogo}
+              alt="NETRA"
+              className="h-9 w-auto object-contain"
+              draggable="false"
             />
           </div>
 
@@ -102,8 +109,7 @@ export default function Sidebar({ collapsed, onToggle }) {
               </h1>
 
               <p className="truncate text-xs text-ink-secondary">
-                Network Entity Tracking &amp;
-                Relational Analytics
+                {t("brand.tagline")}
               </p>
             </div>
           )}
@@ -112,7 +118,7 @@ export default function Sidebar({ collapsed, onToggle }) {
         {!collapsed && (
           <div className="mt-4 rounded-lg border border-edge bg-surface px-3 py-2 text-center">
             <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-secondary">
-              Criminal Network Intelligence
+              {t("brand.sublabel")}
             </p>
           </div>
         )}
@@ -141,7 +147,7 @@ export default function Sidebar({ collapsed, onToggle }) {
             "text-ink-secondary transition hover:bg-white/5 hover:text-ink",
             collapsed ? "justify-center" : "gap-3",
           ].join(" ")}
-          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+          aria-label={collapsed ? t("sidebar.expand") : t("sidebar.collapse")}
         >
           {collapsed ? (
             <ChevronRight size={20} />
@@ -150,7 +156,7 @@ export default function Sidebar({ collapsed, onToggle }) {
               <ChevronLeft size={20} />
 
               <span className="text-sm font-medium">
-                Collapse sidebar
+                {t("sidebar.collapse")}
               </span>
             </>
           )}

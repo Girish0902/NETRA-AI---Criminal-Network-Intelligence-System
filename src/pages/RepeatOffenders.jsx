@@ -4,8 +4,10 @@ import { useMemo, useState } from "react";
 import PageHeader from "../components/common/PageHeader";
 import { useApi } from "../hooks/useApi";
 import { api } from "../services/api";
+import { useI18n } from "../i18n";
 
 function RepeatOffenders() {
+  const { t } = useI18n();
   const [search, setSearch] = useState("");
 
   const {
@@ -115,8 +117,8 @@ function RepeatOffenders() {
     <div className="flex h-full min-h-0 flex-col bg-canvas">
       <PageHeader
         icon={UserRoundSearch}
-        title="Repeat Offenders"
-        description="Identify accused persons appearing across multiple FIR records"
+        title={t("pages.repeatOffenders.title")}
+        description={t("pages.repeatOffenders.description")}
         action={
           <div className="relative">
             <Search

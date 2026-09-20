@@ -18,8 +18,11 @@ import StatCard from "../components/ui/StatCard";
 import MonoLabel from "../components/ui/MonoLabel";
 import { getCaseByNumber, resolveCaseId } from "../data/caseRecords";
 import { getPatternById } from "../data/patternLibrary";
+import { useI18n } from "../i18n";
 
 function CaseOverview() {
+  const { t } = useI18n();
+
   const params = useParams();
   const caseId = resolveCaseId(params.id);
   const record = getCaseByNumber(params.id);
@@ -29,14 +32,14 @@ function CaseOverview() {
       <div className="flex h-full min-h-0 flex-col bg-canvas">
         <PageHeader
           icon={BookOpen}
-          title="Case not found"
-          description="The requested FIR record could not be located in the demonstration dataset."
+          title={t("pages.caseOverview.notFoundTitle")}
+          description={t("pages.caseOverview.notFoundDescription")}
         />
 
         <main className="min-h-0 flex-1 overflow-y-auto p-5">
           <EmptyState
             icon={ShieldAlert}
-            title="No such case record"
+            title={t("pages.caseOverview.noSuchCase")}
             message={`Nothing matched "${params.id ?? ""}". Verify the FIR or case number and try again.`}
             action={
               <Link
@@ -58,8 +61,8 @@ function CaseOverview() {
     <div className="flex h-full min-h-0 flex-col bg-canvas">
       <PageHeader
         icon={BookOpen}
-        title="Case Overview"
-        description="Consolidated case intelligence for a single FIR record"
+        title={t("pages.caseOverview.title")}
+        description={t("pages.caseOverview.description")}
         action={
           <div className="flex flex-wrap items-center gap-3">
             <Link

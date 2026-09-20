@@ -21,46 +21,38 @@ import {
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 import { useAuth } from "../../context/AuthContext";
+import { useI18n } from "../../i18n";
 
 const dateOptions = [
   {
+    key: "last7Days",
     label: "Last 7 days",
     value: "Last 7 days",
   },
   {
+    key: "last30Days",
     label: "Last 30 days",
     value: "Last 30 days",
   },
   {
+    key: "last3Months",
     label: "Last 3 months",
     value: "Last 3 months",
   },
   {
+    key: "last6Months",
     label: "Last 6 months",
     value: "Last 6 months",
   },
   {
+    key: "last12Months",
     label: "Last 12 months",
     value: "Last 12 months",
   },
   {
+    key: "allTime",
     label: "All time",
     value: "All time",
-  },
-];
-
-const languageOptions = [
-  {
-    label: "English",
-    value: "English",
-  },
-  {
-    label: "à²•à²¨à³à²¨à²¡",
-    value: "à²•à²¨à³à²¨à²¡",
-  },
-  {
-    label: "English + à²•à²¨à³à²¨à²¡",
-    value: "English + à²•à²¨à³à²¨à²¡",
   },
 ];
 
@@ -71,7 +63,7 @@ const ALERT_EVENT_NAME =
   "NETRA-alert-status-updated";
 
 const DEFAULT_SETTINGS = {
-  language: "English + à²•à²¨à³à²¨à²¡",
+  language: "en",
   dateRange: "Last 30 days",
   compactInterface: false,
   notificationsEnabled: true,
@@ -138,23 +130,22 @@ export default function Topbar({
     setNotificationsLoading,
   ] = useState(true);
 
+  const { t, locale, setLocale, locales } =
+    useI18n();
+
   const dateRange =
     appSettings.dateRange ||
     DEFAULT_SETTINGS.dateRange;
 
-  const language =
-    appSettings.language ||
-    DEFAULT_SETTINGS.language;
-
-  const selectedDateLabel =
+  const selectedDateOption =
     dateOptions.find(
       (option) => option.value === dateRange,
-    )?.label || DEFAULT_SETTINGS.dateRange;
+    ) || dateOptions[1];
 
   const selectedLanguageLabel =
-    languageOptions.find(
-      (option) => option.value === language,
-    )?.label || DEFAULT_SETTINGS.language;
+    locales.find(
+      (item) => item.code === locale,
+    )?.label || "English";
 
   const unreadCount = notifications.filter(
     (notification) => notification.unread,
@@ -436,6 +427,8 @@ export default function Topbar({
   };
 
   const handleLanguageChange = (value) => {
+    setLocale(value);
+
     saveUpdatedSettings({
       language: value,
     });
@@ -528,7 +521,7 @@ export default function Topbar({
           type="button"
           onClick={onOpenMobileSidebar}
           className="rounded-lg p-2 text-ink-secondary hover:bg-white/5 lg:hidden"
-          aria-label="Open navigation"
+          aria-label={t("topbar.openNavigation")}
         >
           <Menu size={22} />
         </button>
@@ -552,7 +545,7 @@ export default function Topbar({
                   event.target.value,
                 )
               }
-              placeholder="Search case number, accused or district..."
+              placeholder={t("topbar.searchPlaceholder")}
               className={[
                 "h-10 w-full rounded-xl border border-edge",
                 "bg-canvas/70 pl-10 pr-4 text-sm text-ink",
@@ -584,7 +577,9 @@ export default function Topbar({
               <CalendarDays size={17} />
 
               <span>
-                {selectedDateLabel}
+                {t(
+                  `topbar.date.${selectedDateOption.key}`,
+                )}
               </span>
 
               <ChevronDown size={14} />
@@ -603,7 +598,7 @@ export default function Topbar({
                     }
                     className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left text-sm text-ink-secondary hover:bg-white/5 hover:text-ink"
                   >
-                    {option.label}
+                    {t(`topbar.date.${option.key}`)}
 
                     {dateRange ===
                       option.value && (
@@ -645,30 +640,27 @@ export default function Topbar({
 
             {openMenu === "language" && (
               <Dropdown className="right-0 w-56">
-                {languageOptions.map(
-                  (option) => (
+{locales.map((item) => (
                     <button
-                      key={option.value}
+                      key={item.code}
                       type="button"
                       onClick={() =>
                         handleLanguageChange(
-                          option.value,
+                          item.code,
                         )
                       }
                       className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left text-sm text-ink-secondary hover:bg-white/5 hover:text-ink"
                     >
-                      {option.label}
+                      {item.label}
 
-                      {language ===
-                        option.value && (
+                      {locale === item.code && (
                         <Check
                           size={16}
                           className="text-primary"
                         />
                       )}
                     </button>
-                  ),
-                )}
+                  ))}
               </Dropdown>
             )}
           </div>
@@ -688,7 +680,7 @@ export default function Topbar({
                 )
               }
               className="relative rounded-xl border border-edge bg-canvas/70 p-2.5 text-ink-secondary transition hover:border-primary/40 hover:text-ink disabled:cursor-not-allowed disabled:opacity-40"
-              aria-label="Notifications"
+              aria-label={t("topbar.notifications")}
             >
               <Bell size={18} />
 
@@ -704,13 +696,15 @@ export default function Topbar({
                   <div className="flex items-center justify-between border-b border-edge px-4 py-3">
                     <div>
                       <h3 className="font-semibold text-white">
-                        Notifications
+                        {t("topbar.notifications")}
                       </h3>
 
                       <p className="mt-1 text-xs text-ink-muted">
                         {notificationsLoading
-                          ? "Loading..."
-                          : `${unreadCount} unread`}
+                          ? t("common.loading")
+                          : t("topbar.unreadCount", {
+                              count: unreadCount,
+                            })}
                       </p>
                     </div>
 
@@ -723,7 +717,7 @@ export default function Topbar({
                           }
                           className="text-xs font-medium text-primary hover:text-primary-hover"
                         >
-                          Mark all read
+                          {t("topbar.markAllRead")}
                         </button>
                       )}
                   </div>
@@ -732,14 +726,13 @@ export default function Topbar({
                     {notificationsLoading ? (
                       <div className="flex min-h-32 items-center justify-center px-4">
                         <p className="text-sm text-ink-secondary">
-                          Loading dataset alerts...
+                          {t("topbar.loadingAlerts")}
                         </p>
                       </div>
                     ) : notifications.length === 0 ? (
                       <div className="flex min-h-32 items-center justify-center px-4 text-center">
                         <p className="text-sm text-ink-secondary">
-                          No intelligence alerts are
-                          available.
+                          {t("topbar.noAlerts")}
                         </p>
                       </div>
                     ) : (
@@ -813,14 +806,16 @@ export default function Topbar({
                                       {notification.caseCount.toLocaleString(
                                         "en-IN",
                                       )}{" "}
-                                      cases
+                                      {t("common.cases")}
                                     </span>
                                   )}
 
                                   <span>
                                     {notification.unread
-                                      ? "New"
-                                      : "Acknowledged"}
+                                      ? t("topbar.new")
+                                      : t(
+                                          "topbar.acknowledged",
+                                        )}
                                   </span>
                                 </div>
                               </div>
@@ -840,7 +835,7 @@ export default function Topbar({
                       }}
                       className="w-full rounded-lg py-2 text-sm font-medium text-primary-hover hover:bg-white/5 hover:text-primary"
                     >
-                      View all alerts
+                      {t("topbar.viewAllAlerts")}
                     </button>
                   </div>
                 </Dropdown>
@@ -859,7 +854,7 @@ export default function Topbar({
                 )
               }
               className="ml-1 flex size-10 items-center justify-center rounded-xl bg-primary font-semibold text-white hover:bg-primary-hover"
-              aria-label="Open user profile"
+              aria-label={t("topbar.openProfile")}
             >
               {user?.initials || "KP"}
             </button>
@@ -868,18 +863,18 @@ export default function Topbar({
               <Dropdown className="right-0 w-64">
                 <div className="border-b border-edge px-4 py-4">
                   <p className="font-semibold text-white">
-                    {user?.name || "State Police"}
+                    {user?.name || t("common.statePolice")}
                   </p>
 
                   <p className="mt-1 text-xs text-ink-muted">
-                    {user?.role || "Crime Intelligence Analyst"}
+                    {user?.role || t("common.roleDefault")}
                   </p>
                 </div>
 
                 <div className="p-2">
                   <MenuButton
                     icon={UserRound}
-                    label="View profile"
+                    label={t("topbar.viewProfile")}
                     onClick={() => {
                       setOpenMenu(null);
                       navigate("/profile");
@@ -888,7 +883,7 @@ export default function Topbar({
 
                   <MenuButton
                     icon={Settings}
-                    label="Settings"
+                    label={t("nav.settings")}
                     onClick={() => {
                       setOpenMenu(null);
                       navigate("/settings");
@@ -899,7 +894,7 @@ export default function Topbar({
 
                   <MenuButton
                     icon={LogOut}
-                    label="Sign out"
+                    label={t("topbar.logout")}
                     danger
                     onClick={handleLogout}
                   />

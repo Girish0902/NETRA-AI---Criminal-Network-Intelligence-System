@@ -26,6 +26,7 @@ import {
 import PageHeader from "../components/common/PageHeader";
 import { useApi } from "../hooks/useApi";
 import { api } from "../services/api";
+import { useI18n } from "../i18n";
 
 /* -------------------------------------------------------------------------- */
 /*  Palette (kept in sync with the Tailwind tokens used across the dashboard)  */
@@ -83,6 +84,8 @@ const TIER_META = {
 /* -------------------------------------------------------------------------- */
 
 function CriminalNetwork() {
+  const { t } = useI18n();
+
   const cyRef = useRef(null);
 
   const [selectedId, setSelectedId] = useState(null);
@@ -437,7 +440,7 @@ function CriminalNetwork() {
 
   const layoutOptions = useMemo(() => ({
     name: "cose",
-    animate: true,
+    animate: false,
     componentSpacing: 140,
     nodeRepulsion: 14000,
     nodeOverlap: 28,
@@ -512,14 +515,30 @@ function CriminalNetwork() {
     const cy = cyRef.current;
     if (!cy || elements.length === 0) return;
 
-    const layout = cy.layout(layoutOptions);
-    layout.run();
+    let layout = null;
 
-    const timer = setTimeout(() => cy.fit(undefined, 48), 700);
+    try {
+      layout = cy.layout(layoutOptions);
+      layout.run();
+    } catch {
+      void layout;
+    }
+
+    const timer = setTimeout(() => {
+      try {
+        cy.fit(undefined, 48);
+      } catch {
+        void 0;
+      }
+    }, 700);
 
     return () => {
       clearTimeout(timer);
-      layout.stop();
+      try {
+        layout?.stop();
+      } catch {
+        void layout;
+      }
     };
   }, [elements, layoutOptions, layoutTick]);
 
@@ -620,8 +639,8 @@ function CriminalNetwork() {
     <div className="flex h-full min-h-0 flex-col bg-canvas">
       <PageHeader
         icon={Network}
-        title="Criminal Network"
-        description="Co-accused relationships derived from shared FIR records"
+        title={t("pages.network.title")}
+        description={t("pages.network.description")}
         action={
           <div className="relative flex gap-2">
             <div className="relative">

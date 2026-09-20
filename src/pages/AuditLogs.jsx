@@ -18,8 +18,11 @@ import {
   getAuditLogs,
   subscribeToAuditLogs,
 } from "../utils/auditLogger";
+import { useI18n } from "../i18n";
 
 function AuditLogs() {
+  const { t } = useI18n();
+
   const [logs, setLogs] = useState(
     () => getAuditLogs(),
   );
@@ -123,8 +126,8 @@ function AuditLogs() {
     <div className="flex h-full min-h-0 flex-col bg-canvas">
       <PageHeader
         icon={ShieldCheck}
-        title="Audit Logs"
-        description="Track data access, AI queries, reports and security-related activity"
+        title={t("pages.auditLogs.title")}
+        description={t("pages.auditLogs.description")}
         action={
           <button
             type="button"
@@ -143,14 +146,14 @@ function AuditLogs() {
       <main className="min-h-0 flex-1 overflow-y-auto p-5">
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <Summary
-            title="Total activities"
+            title={t("pages.auditLogs.totalActivities")}
             value={formatNumber(
               logs.length,
             )}
           />
 
           <Summary
-            title="Successful"
+            title={t("pages.auditLogs.successful")}
             value={formatNumber(
               logs.filter(
                 (log) =>
@@ -161,7 +164,7 @@ function AuditLogs() {
           />
 
           <Summary
-            title="Denied"
+            title={t("pages.auditLogs.denied")}
             value={formatNumber(
               logs.filter(
                 (log) =>
@@ -172,7 +175,7 @@ function AuditLogs() {
           />
 
           <Summary
-            title="AI queries"
+            title={t("pages.auditLogs.aiQueries")}
             value={formatNumber(
               logs.filter(
                 (log) =>

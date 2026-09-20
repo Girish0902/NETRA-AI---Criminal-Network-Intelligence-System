@@ -16,10 +16,12 @@ import { addAuditLog } from "../utils/auditLogger";
 
 import PageHeader from "../components/common/PageHeader";
 import { api } from "../services/api";
+import { useI18n } from "../i18n";
 
 const STORAGE_KEY = "NETRA-acknowledged-alerts";
 
 function Alerts() {
+  const { t } = useI18n();
   const [alerts, setAlerts] = useState([]);
   const [filter, setFilter] = useState("All");
   const [loading, setLoading] = useState(true);
@@ -187,8 +189,8 @@ function Alerts() {
     <div className="flex h-full min-h-0 flex-col bg-canvas">
       <PageHeader
         icon={Bell}
-        title="Intelligence Alerts"
-        description="Review emerging hotspots, unusual crime patterns and operational warnings"
+        title={t("pages.alerts.title")}
+        description={t("pages.alerts.description")}
         action={
           <div className="flex items-center gap-2">
             <Filter
@@ -227,7 +229,7 @@ function Alerts() {
 
         <div className="grid gap-4 md:grid-cols-4">
           <Summary
-            title="All alerts"
+            title={t("pages.alerts.allAlerts")}
             value={
               loading
                 ? "..."
@@ -238,7 +240,7 @@ function Alerts() {
           />
 
           <Summary
-            title="Critical"
+            title={t("pages.alerts.critical")}
             value={
               loading
                 ? "..."
@@ -247,7 +249,7 @@ function Alerts() {
           />
 
           <Summary
-            title="New"
+            title={t("pages.alerts.new")}
             value={
               loading
                 ? "..."
@@ -256,7 +258,7 @@ function Alerts() {
           />
 
           <Summary
-            title="Acknowledged"
+            title={t("pages.alerts.acknowledged")}
             value={
               loading
                 ? "..."
