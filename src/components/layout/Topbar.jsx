@@ -10,6 +10,7 @@ import {
   CalendarDays,
   Check,
   ChevronDown,
+  FilePlus2,
   Languages,
   LogOut,
   Menu,
@@ -558,6 +559,16 @@ export default function Topbar({
         </form>
 
         <div className="ml-auto flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => navigate("/cases/new")}
+            className="flex shrink-0 items-center gap-2 rounded-xl border border-edge bg-canvas/70 px-3 py-2 text-sm text-ink-secondary transition hover:border-primary/40 hover:text-ink"
+            aria-label="New Case"
+          >
+            <FilePlus2 size={17} />
+            <span className="hidden lg:inline">New Case</span>
+          </button>
+
           {/* Functional date filter */}
           <div
             data-tour="topbar-date"

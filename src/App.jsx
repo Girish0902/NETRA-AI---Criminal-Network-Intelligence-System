@@ -23,6 +23,7 @@ import EvidenceViewer from "./pages/EvidenceViewer";
 import HotspotMap from "./pages/HotspotMap";
 import InvestigationWorkspace from "./pages/InvestigationWorkspace";
 import Login from "./pages/Login";
+import NewCase from "./pages/NewCase";
 import NotFound from "./pages/NotFound";
 import PatternLibrary from "./pages/PatternLibrary";
 import Predictions from "./pages/Predictions";
@@ -161,6 +162,11 @@ export default function App() {
         <Route
           path="cases"
           element={<CaseSearch />}
+        />
+
+        <Route
+          path="cases/new"
+          element={<NewCase />}
         />
 
         <Route

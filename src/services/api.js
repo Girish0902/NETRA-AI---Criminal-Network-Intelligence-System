@@ -38,6 +38,12 @@ export const api = {
   reports: (query = "") => request(`/reports${query}`),
   alerts: () => request("/alerts"),
   resources: () => request("/resources"),
+  cases: (query = "") => request(`/cases${query}`),
+  createCase: record =>
+    request("/cases", {
+      method: "POST",
+      body: JSON.stringify(record)
+    }),
   search: q =>
     request(`/search?q=${encodeURIComponent(q)}`),
   assistant: question =>

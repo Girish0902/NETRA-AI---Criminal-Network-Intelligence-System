@@ -143,6 +143,121 @@ export const caseRecords = [
   },
 ];
 
+function caseNumberExists(caseNo) {
+  const normalized = String(caseNo).trim().toUpperCase();
+
+  return caseRecords.some(
+    (record) =>
+      String(record.caseNo).toUpperCase() ===
+      normalized,
+  );
+}
+
+function createUniqueCaseNo(candidate) {
+  const requestedCaseNo =
+    String(candidate || "").trim() ||
+    `NETRA-${Date.now()}`;
+
+  if (!caseNumberExists(requestedCaseNo)) {
+    return requestedCaseNo;
+  }
+
+  const match = requestedCaseNo.match(
+    /^(.*?)(\d+)$/,
+  );
+
+  if (match) {
+    const prefix = match[1];
+    const suffixText = match[2];
+    const suffix = Number(suffixText);
+    const modulus = 10 ** suffixText.length;
+
+    for (
+      let offset = 1;
+      offset < modulus;
+      offset += 1
+    ) {
+      const nextSuffix = String(
+        (suffix + offset) % modulus,
+      ).padStart(suffixText.length, "0");
+      const nextCaseNo =
+        `${prefix}${nextSuffix}`;
+
+      if (!caseNumberExists(nextCaseNo)) {
+        return nextCaseNo;
+      }
+    }
+  }
+
+  let attempt = 0;
+  let fallbackCaseNo;
+
+  do {
+    attempt += 1;
+    fallbackCaseNo =
+      `${requestedCaseNo}-${Date.now()}-${attempt}`;
+  } while (caseNumberExists(fallbackCaseNo));
+
+  return fallbackCaseNo;
+}
+
+function cloneRecordItems(items) {
+  return Array.isArray(items)
+    ? items.map((item) =>
+        item && typeof item === "object"
+          ? { ...item }
+          : item,
+      )
+    : [];
+}
+
+export function createCase(record = {}) {
+  const caseNo = createUniqueCaseNo(record.caseNo);
+
+  const createdRecord = {
+    id:
+      record.id ??
+      `case-${caseNo
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")}`,
+    ...record,
+    caseNo,
+    crimeNo: record.crimeNo ?? caseNo,
+    registrationDate:
+      record.registrationDate ??
+      new Date().toISOString().slice(0, 10),
+    district: record.district ?? "Unknown",
+    policeStation:
+      record.policeStation ?? "Unknown",
+    crimeHead: record.crimeHead ?? "Unknown",
+    gravity: record.gravity ?? "Unknown",
+    status: record.status ?? "Unknown",
+    summary: record.summary ?? "",
+    sections: cloneRecordItems(record.sections),
+    accused: cloneRecordItems(record.accused),
+    victims: cloneRecordItems(record.victims),
+    investigators: cloneRecordItems(
+      record.investigators,
+    ),
+    evidence: cloneRecordItems(record.evidence),
+    access: record.access ?? "granted",
+    createdBy:
+      record.createdBy &&
+      typeof record.createdBy === "object"
+        ? { ...record.createdBy }
+        : record.createdBy ?? null,
+    createdAt:
+      record.createdAt ??
+      new Date().toISOString(),
+    isOpen: record.isOpen ?? true,
+  };
+
+  // The local API is read-only, so new records last for this session only.
+  caseRecords.unshift(createdRecord);
+
+  return createdRecord;
+}
+
 export function getCaseByNumber(caseNo) {
   if (!caseNo) {
     return null;

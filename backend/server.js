@@ -117,7 +117,118 @@ for (const a of db.accused) {
 
 const resourcesCache = buildResourceTables();
 
+let lastCaseMasterId = db.cases.reduce(
+  (max, row) => Math.max(max, n(row.CaseMasterID)),
+  0
+);
+
+function normalizeName(value) {
+  return String(value === undefined || value === null ? "" : value)
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, " ");
+}
+
+function findMasterByName(rows, nameField, value) {
+  const needle = normalizeName(value);
+  if (!needle) return null;
+  return (
+    rows.find((row) => normalizeName(row[nameField]) === needle) || null
+  );
+}
+
+function findMasterByPartialName(rows, nameField, value) {
+  const needle = normalizeName(value);
+  if (!needle) return null;
+  return (
+    rows.find((row) => {
+      const candidate = normalizeName(row[nameField]);
+      return candidate && (candidate.includes(needle) || needle.includes(candidate));
+    }) || null
+  );
+}
+
+function resolveGravityRow(value) {
+  const exact = findMasterByName(db.gravity, "LookupValue", value);
+  if (exact) return exact;
+
+  const needle = normalizeName(value);
+  if (needle && /high|severe|critical/.test(needle)) {
+    return index.gravity.get("1") || db.gravity[0] || null;
+  }
+
+  if (needle && /medium|moderate/.test(needle)) {
+    return index.gravity.get("2") || db.gravity[1] || null;
+  }
+
+  return null;
+}
+
+function caseNoTaken(candidate) {
+  const needle = String(candidate || "").trim().toLowerCase();
+  if (!needle) return true;
+
+  return db.cases.some(
+    (row) => normalizeName(row.CaseNo) === needle
+  );
+}
+
+function nextCaseNo(candidate) {
+  const requested = String(
+    candidate === undefined || candidate === null ? "" : candidate
+  )
+    .trim();
+
+  if (requested && !caseNoTaken(requested)) {
+    return requested;
+  }
+
+  const match = requested.match(/^(.*?)(\d+)$/);
+
+  if (match) {
+    const prefix = match[1];
+    const suffixText = match[2];
+    const suffix = Number(suffixText);
+    const modulus = 10 ** suffixText.length;
+
+    for (let offset = 1; offset < modulus; offset += 1) {
+      const nextSuffix = String((suffix + offset) % modulus).padStart(
+        suffixText.length,
+        "0"
+      );
+      const nextCandidate = `${prefix}${nextSuffix}`;
+
+      if (!caseNoTaken(nextCandidate)) {
+        return nextCandidate;
+      }
+    }
+  }
+
+  const base = requested || `NETRA-${new Date().getFullYear()}`;
+  let attempt = 0;
+  let fallbackCaseNo;
+
+  do {
+    attempt += 1;
+    fallbackCaseNo = `${base}-${Date.now()}-${attempt}`;
+  } while (caseNoTaken(fallbackCaseNo));
+
+  return fallbackCaseNo;
+}
+
+function formatDateOnly(value) {
+  const date = isoDate(value) || new Date();
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+}
+
 function caseDistrictId(c) {
+  if (c.RegisteredDistrictID) {
+    return String(c.RegisteredDistrictID);
+  }
   return String(index.units.get(String(c.PoliceStationID))?.DistrictID || "");
 }
 
@@ -126,13 +237,13 @@ function enrichCase(c) {
   return {
     ...c,
     districtId,
-    districtName: index.districts.get(districtId)?.DistrictName || "Unknown",
-    policeStationName: index.units.get(String(c.PoliceStationID))?.UnitName || "Unknown",
-    crimeHeadName: index.heads.get(String(c.CrimeMajorHeadID))?.CrimeGroupName || "Unknown",
+    districtName: c.districtName || index.districts.get(districtId)?.DistrictName || "Unknown",
+    policeStationName: c.policeStationName || index.units.get(String(c.PoliceStationID))?.UnitName || "Unknown",
+    crimeHeadName: c.crimeHeadName || index.heads.get(String(c.CrimeMajorHeadID))?.CrimeGroupName || "Unknown",
     crimeSubHeadName:
-      index.subHeads.get(String(c.CrimeMinorHeadID))?.CrimeHeadName || "Unknown",
-    statusName: index.statuses.get(String(c.CaseStatusID))?.CaseStatusName || "Unknown",
-    gravityName: index.gravity.get(String(c.GravityOffenceID))?.LookupValue || "Unknown"
+      c.crimeSubHeadName || index.subHeads.get(String(c.CrimeMinorHeadID))?.CrimeHeadName || "Unknown",
+    statusName: c.statusName || index.statuses.get(String(c.CaseStatusID))?.CaseStatusName || "Unknown",
+    gravityName: c.gravityName || index.gravity.get(String(c.GravityOffenceID))?.LookupValue || "Unknown"
   };
 }
 
@@ -684,6 +795,91 @@ const alerts = [
 ];
 
   res.json({ alerts });
+});
+
+app.get("/api/cases", (req, res) => {
+  const { limit } = req.query;
+  const maxRows = clampQueryNumber(limit, 100, 1, 5000);
+  const cases = filterCases(req).map(enrichCase);
+
+  res.json({
+    total: cases.length,
+    cases: cases.slice(0, maxRows)
+  });
+});
+
+app.post("/api/cases", (req, res) => {
+  const body = req.body && typeof req.body === "object" ? req.body : {};
+  const payload = body.case && typeof body.case === "object" ? body.case : body;
+
+  const crimeHead = String(payload.crimeHead || "").trim();
+  const districtName = String(payload.district || "").trim();
+  const policeStationName = String(payload.policeStation || "").trim();
+  const statusName = String(payload.status || "").trim();
+  const gravityName = String(payload.gravity || "").trim();
+  const registrationDate = payload.registrationDate;
+
+  if (!crimeHead || !districtName || !policeStationName || !registrationDate) {
+    return res.status(400).json({
+      message:
+        "crimeHead, district, policeStation and registrationDate are required to register a case."
+    });
+  }
+
+  const district = findMasterByName(db.districts, "DistrictName", districtName);
+  const status = findMasterByName(db.statuses, "CaseStatusName", statusName);
+  const gravity = resolveGravityRow(gravityName);
+  const subHead =
+    findMasterByName(db.crimeSubHeads, "CrimeHeadName", crimeHead) ||
+    findMasterByPartialName(db.crimeSubHeads, "CrimeHeadName", crimeHead);
+  const crimeGroup = subHead
+    ? index.heads.get(String(subHead.CrimeHeadID))
+    : findMasterByName(db.crimeHeads, "CrimeGroupName", crimeHead);
+
+  const caseNo = nextCaseNo(payload.caseNo);
+  lastCaseMasterId += 1;
+
+  const caseRow = {
+    CaseMasterID: lastCaseMasterId,
+    CrimeNo: String(payload.crimeNo || caseNo).trim(),
+    CaseNo: caseNo,
+    CrimeRegisteredDate: formatDateOnly(registrationDate),
+    PolicePersonID: String(
+      (payload.createdBy && payload.createdBy.id) || ""
+    ),
+    PoliceStationID: "",
+    RegisteredDistrictID: district ? String(district.DistrictID) : "",
+    CaseCategoryID: "",
+    GravityOffenceID: gravity ? String(gravity.GravityOffenceID) : "",
+    CrimeMajorHeadID: crimeGroup ? String(crimeGroup.CrimeHeadID) : "",
+    CrimeMinorHeadID: subHead ? String(subHead.CrimeSubHeadID) : "",
+    CaseStatusID: status ? String(status.CaseStatusID) : "",
+    CourtID: "",
+    IncidentFromDate: "",
+    IncidentToDate: "",
+    InfoReceivedPSDate: "",
+    latitude: "",
+    longitude: "",
+    BriefFacts: String(payload.summary || ""),
+    districtName: district ? district.DistrictName : districtName,
+    policeStationName,
+    crimeHeadName: crimeGroup ? crimeGroup.CrimeGroupName : crimeHead,
+    crimeSubHeadName: subHead ? subHead.CrimeHeadName : crimeHead,
+    statusName: status ? status.CaseStatusName : statusName,
+    gravityName
+  };
+
+  db.cases.unshift(caseRow);
+  enrichedCaseCache.unshift(enrichCase(caseRow));
+
+  const createdCase = enrichCase(caseRow);
+
+  res.status(201).json({
+    created: true,
+    caseNo: createdCase.CaseNo,
+    crimeNo: createdCase.CrimeNo,
+    case: createdCase
+  });
 });
 
 app.get("/api/search", (req, res) => {

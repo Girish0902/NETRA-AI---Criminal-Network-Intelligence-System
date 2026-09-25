@@ -9,6 +9,7 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import { addAuditLog } from "../utils/auditLogger";
+import { caseRecords } from "../data/caseRecords";
 
 import PageHeader from "../components/common/PageHeader";
 import { api } from "../services/api";
@@ -126,8 +127,17 @@ function CaseSearch() {
 
           const normalizedCases =
             normalizeCases(source);
+          const displayCases = mergeCases(
+            normalizedCases,
+            normalizeLocalCases(
+              caseRecords.filter(
+                (record) => record.createdAt,
+              ),
+              query,
+            ),
+          );
 
-          setCases(normalizedCases);
+          setCases(displayCases);
 
           if (query.trim()) {
             addAuditLog({
@@ -135,47 +145,27 @@ function CaseSearch() {
              resource: query.trim(),
              category: "Case Search",
              status: "Success",
-             details: `${normalizedCases.length} matching records returned`,
+             details: `${displayCases.length} matching records returned`,
               });
           }
 
-          setDistricts((current) => {
-            if (current.length > 0) {
-              return current;
-            }
+          setDistricts((current) =>
+            mergeFilterOptions(
+              current,
+              displayCases
+                .map((crime) => crime.district)
+                .filter(Boolean),
+            ),
+          );
 
-            return [
-              ...new Set(
-                normalizedCases
-                  .map(
-                    (crime) =>
-                      crime.district,
-                  )
-                  .filter(Boolean),
-              ),
-            ].sort((first, second) =>
-              first.localeCompare(second),
-            );
-          });
-
-          setStatuses((current) => {
-            if (current.length > 0) {
-              return current;
-            }
-
-            return [
-              ...new Set(
-                normalizedCases
-                  .map(
-                    (crime) =>
-                      crime.status,
-                  )
-                  .filter(Boolean),
-              ),
-            ].sort((first, second) =>
-              first.localeCompare(second),
-            );
-          });
+          setStatuses((current) =>
+            mergeFilterOptions(
+              current,
+              displayCases
+                .map((crime) => crime.status)
+                .filter(Boolean),
+            ),
+          );
         } catch (searchError) {
           console.error(
             "Case search failed:",
@@ -184,7 +174,12 @@ function CaseSearch() {
 
           if (!active) return;
 
-          setCases([]);
+          setCases(
+            normalizeLocalCases(
+              caseRecords,
+              query,
+            ),
+          );
 
           setError(
             searchError?.message ??
@@ -426,6 +421,76 @@ function CaseSearch() {
   );
 }
 
+function mergeFilterOptions(
+  currentOptions,
+  additionalOptions,
+) {
+  return [
+    ...new Set(
+      [...currentOptions, ...additionalOptions]
+        .map((option) => String(option).trim())
+        .filter(Boolean),
+    ),
+  ].sort((first, second) =>
+    first.localeCompare(second),
+  );
+}
+
+function normalizeLocalCases(records, query) {
+  const normalizedQuery = query.trim().toLowerCase();
+
+  const matchingRecords = normalizedQuery
+    ? records.filter((record) =>
+        [
+          record.caseNo,
+          record.crimeNo,
+          record.registrationDate,
+          record.district,
+          record.policeStation,
+          record.crimeHead,
+          record.status,
+          record.gravity,
+          record.summary,
+          ...(Array.isArray(record.accused)
+            ? record.accused
+            : []),
+          ...(Array.isArray(record.victims)
+            ? record.victims
+            : []),
+          ...(Array.isArray(record.sections)
+            ? record.sections
+            : []),
+        ].some((value) =>
+          String(value ?? "")
+            .toLowerCase()
+            .includes(normalizedQuery),
+        ),
+      )
+    : records;
+
+  return normalizeCases(matchingRecords);
+}
+
+function mergeCases(remoteCases, localCases) {
+  const casesByNumber = new Map();
+
+  for (const crime of remoteCases) {
+    casesByNumber.set(
+      String(crime.caseNo).toUpperCase(),
+      crime,
+    );
+  }
+
+  for (const crime of localCases) {
+    casesByNumber.set(
+      String(crime.caseNo).toUpperCase(),
+      crime,
+    );
+  }
+
+  return [...casesByNumber.values()];
+}
+
 function normalizeCases(value) {
   if (!Array.isArray(value)) {
     return [];
@@ -475,6 +540,7 @@ function normalizeCases(value) {
       crime.crimeHeadName ??
       crime.CrimeGroupName ??
       crime.crime ??
+      crime.crimeHead ??
       "Unknown",
 
     status:

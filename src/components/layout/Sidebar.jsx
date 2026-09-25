@@ -15,7 +15,7 @@ function SidebarLink({ item, collapsed }) {
   return (
     <NavLink
       to={item.path}
-      end={item.path === "/"}
+      end
       title={collapsed ? label : undefined}
       className={({ isActive }) =>
         [
